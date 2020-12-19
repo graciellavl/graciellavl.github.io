@@ -1,0 +1,186 @@
+body {
+    font-family: 'Nunito Sans', sans-serif;
+    margin: 0;
+    color: #383E43;
+}
+
+.navbar {
+    position: sticky;
+    background-color: #DDD2C0;
+    width: 100%;
+    display: flex;
+}
+
+.title {
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: bold;
+    font-size: 40px;
+    padding: 1% 5%;
+    padding-top: 3%;
+}
+
+.login {
+    position: absolute;
+    font-size: 28px;
+    padding-top: 2%;
+    right: 8%;
+}
+
+.container {
+    display: flex;
+    margin: 2% 7%;
+}
+
+.content {
+    width: 60%;
+}
+
+.choice {
+    margin: 10px;
+    padding: 1%;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.type {
+    background-color: #DDD2C0;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    border: none;
+}
+.type:hover {
+    cursor: pointer;
+    background-color: #383E43;
+    color: #DDD2C0;
+}
+.on {
+    background-color: #383E43;
+    color: #DDD2C0;
+    box-shadow: 0px 4px 4px 0px #000000 25%;
+}
+
+.menu {
+    margin: 20px;
+    padding: 1%;
+    background-color: #DDD2C0;
+}
+
+.menu-title {
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 32px;
+    padding: 15px;
+    padding-bottom: 0;
+}
+
+.isi-menu {
+    margin: 20px;
+    display: flex;
+}
+
+.gambar-makanan {
+    flex-grow: 1;
+}
+img {
+    width: 200px;
+    height: 200px;
+}
+.deskripsi-menu {
+    width: 100%;
+    margin: 10px;
+    flex-grow: 2;
+    height: 200px;
+    align-items: center;
+}
+.nama{
+    font-size: 20px;
+    font-weight: bold;
+}
+.component {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    bottom: 0px;
+    right: 0px;
+}
+.icon {
+    border-radius: 5px;
+    border: none;
+    height: 30px;
+    padding: 5px;
+    width: 30px;
+    text-align: center;
+    margin: 5px;
+}
+.minus {
+    background-color:#CB2317;
+}
+.nol {
+    background-color:#E5E5E5;
+}
+.plus {
+    background-color:#67A836;
+}
+
+.bills {
+    margin: 20px;
+    background-color: #DDD2C0;
+    width: 30%;
+    padding: 3%;
+    outline: 1px solid #383E43;
+    outline-offset: -10px;
+}
+
+.bill-title {
+    font-family: "Josefin Sans", sans-serif;
+    text-align: center;
+    font-size: 28px;
+}
+
+.total {
+    display: flex;
+}
+.total-text {
+    flex-grow: 2;
+    font-weight: bold;
+}
+
+.total-number {
+    text-align: right;
+    font-weight: bold;
+}
+
+hr {
+    border-color: #383E43;
+    background-color: #383E43;
+}
+
+.pesan-button {
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    color: #DDD2C0;
+    background-color: #67A836;
+    padding: 10px;
+    display: block;
+    margin: 20px auto 0px auto;
+}
+
+.footer {
+    background-color: #DDD2C0;
+    padding: 2%;
+    text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .content{
+        width: 100%;
+    }
+    .bills{
+        width: 100%;
+    }
+}
