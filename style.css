@@ -33,6 +33,7 @@ body {
 
 .content {
     width: 60%;
+    flex-grow: 2;
 }
 
 .choice {
@@ -99,12 +100,11 @@ img {
     font-weight: bold;
 }
 .component {
-    width: 50%;
+    width: 120px;
     display: flex;
     align-items: center;
-    position: relative;
-    bottom: 0px;
-    right: 0px;
+    margin: 10px auto;
+
 }
 .icon {
     border-radius: 5px;
@@ -126,9 +126,10 @@ img {
 }
 
 .bills {
-    margin: 20px;
+    /* margin: 20px; */
     background-color: #DDD2C0;
-    width: 30%;
+    /* width: 30%; */
+    flex-grow: 1;
     padding: 3%;
     outline: 1px solid #383E43;
     outline-offset: -10px;
@@ -176,11 +177,29 @@ hr {
     text-align: center;
 }
 
-@media only screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
+    .title {
+        font-size: 18px;
+    }
+    .login{
+        font-size: 14px;
+    }
+    .choice {
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+    }
+    .container, .isi-menu {
+        flex-direction: column;
+    }
+    .gambar-makanan{
+        margin: auto;
+    }
     .content{
         width: 100%;
     }
     .bills{
-        width: 100%;
+        width: 80%;
+        margin: 5px auto;
+        padding: 20px;
     }
 }
