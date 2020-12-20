@@ -25,19 +25,28 @@ body {
     right: 8%;
     display: flex;
 }
+img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    margin-right: 10px;
+}
 .display-name {
-    font-size: 28px;
+    font-size: 20px;
     border: none;
     background-color: #DDD2C0;
+    align-self: center;
+    margin-right: 20px;
 }
 #profilePictureDiv{
     width: 50px;
     height: 50px;
 }
 .login-text {
-    font-size: 28px;
+    font-size: 20px;
     border: none;
     background-color: #DDD2C0;
+    margin: auto 20px;
 }
 .login-text:hover{
     cursor: pointer;
@@ -101,7 +110,7 @@ body {
 .gambar-makanan {
     flex-grow: 1;
 }
-img {
+.food-pict {
     width: 200px;
     height: 200px;
 }
