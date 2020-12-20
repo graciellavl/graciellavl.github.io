@@ -4,8 +4,6 @@
     <title>Food Menu</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="liff-starter.js"></script>
-    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
@@ -16,7 +14,8 @@
     <div class="navbar">
         <div class="icon"><i class="fa fa-cutlery" aria-hidden="true"></i></div>
         <div class="title">LIFF Food Order</div>
-        <div class="login">Login</div>
+        <button class="login" id="liffLoginButton">Login</button>
+        <div id="displayNameField" class="login"></div>
     </div>
     <div class="container">
         <div class="content">
@@ -64,3 +63,6 @@
     </div>
     <div class="footer">graciellavl</div>
 </body>
+
+<script src="index.js"></script>
+<script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>

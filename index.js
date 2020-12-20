@@ -68,10 +68,11 @@ function initializeApp() {
 
     // check if the user is logged in/out, and disable inappropriate button
     if (liff.isLoggedIn()) {
-        document.getElementById('liffLoginButton').disabled = true;
-    } else {
-        document.getElementById('liffLogoutButton').disabled = true;
-    }
+        document.getElementById('liffLoginButton').display = "none";
+    } 
+    // else {
+    //     document.getElementById('liffLogoutButton').disabled = true;
+    // }
 }
 
 /**
@@ -107,7 +108,7 @@ function registerButtonHandlers() {
     // openWindow call
     document.getElementById('openWindowButton').addEventListener('click', function() {
         liff.openWindow({
-            url: 'https://line.me',
+            url: 'https://liff-food-order.netlify.app/',
             external: true
         });
     });

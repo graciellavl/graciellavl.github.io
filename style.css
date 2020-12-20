@@ -22,8 +22,14 @@ body {
 .login {
     position: absolute;
     font-size: 28px;
-    padding-top: 2%;
+    margin-top: 2%;
     right: 8%;
+    border: none;
+    background-color: #DDD2C0;
+}
+.login:hover{
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .container {
