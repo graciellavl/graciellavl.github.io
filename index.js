@@ -63,7 +63,7 @@ function initializeLiff(myLiffId) {
  */
 function initializeApp() {
     // displayLiffData();
-    // displayIsInClientInfo();
+    displayIsInClientInfo();
     registerButtonHandlers();
 
     // check if the user is logged in/out, and disable inappropriate button
