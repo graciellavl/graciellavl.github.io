@@ -8,6 +8,7 @@ body {
     position: sticky;
     background-color: #DDD2C0;
     width: 100%;
+    min-height: 100px;
     display: flex;
 }
 
@@ -17,6 +18,7 @@ body {
     font-size: 40px;
     padding: 1% 5%;
     padding-top: 3%;
+    margin: auto 0px;
 }
 
 .login {
