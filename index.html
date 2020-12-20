@@ -11,56 +11,60 @@
 </head>
 
 <body>
-    <div class="navbar">
-        <div class="icon"><i class="fa fa-cutlery" aria-hidden="true"></i></div>
-        <div class="title">LIFF Food Order</div>
-        <button class="login" id="liffLoginButton">Login</button>
-        <div id="displayNameField" class="login"></div>
-    </div>
-    <div class="container">
-        <div class="content">
-            <div class="choice">
-                <button class="type on">Korean</button>
-                <button class="type">Western</button>
-                <button class="type">Indonesian</button>
-                <button class="type">Beverages</button>
-                <button class="type">Italian</button>
-                <button class="type">Fruits</button>
-                <button class="type">Vegetables</button>
-                <button class="type">Dessert</button>
-            </div>
-            <div class="menu">
-                <div class="menu-title">Korean Food</div>
-                <hr>
-                <div class="isi-menu">
-                    <div class="gambar-makanan">
-                        <img src="https://cf.shopee.co.id/file/9b4029f62c483554dca45d8ea6529adb" alt="">
-                    </div>
-                    <div class="deskripsi-menu">
-                        <div class="nama"> Tteokbokki </div>
-                        <div class="desc"> Tteokbokki atau kue beras dengan tekstur kenyal dan saus merah yang pedas manis. </div>
-                        <div class="harga"></div>
-                        <div class="component">
-                            <button class="icon minus">-</button>
-                            <div class="icon nol">0</div>
-                            <button class="icon plus">+</button>
+    <div id="liffAppContent">
+        <div class="navbar">
+            <div class="icon"><i class="fa fa-cutlery" aria-hidden="true"></i></div>
+            <div class="title">LIFF Food Order</div>
+            <button class="login" id="liffLoginButton">Login</button>
+            <div id="displayNameField" class="login"></div>
+        </div>
+        <div class="container">
+            <div class="content">
+                <div class="choice">
+                    <button class="type on">Korean</button>
+                    <button class="type">Western</button>
+                    <button class="type">Indonesian</button>
+                    <button class="type">Beverages</button>
+                    <button class="type">Italian</button>
+                    <button class="type">Fruits</button>
+                    <button class="type">Vegetables</button>
+                    <button class="type">Dessert</button>
+                </div>
+                <div class="menu">
+                    <div class="menu-title">Korean Food</div>
+                    <hr>
+                    <div class="isi-menu">
+                        <div class="gambar-makanan">
+                            <img src="https://cf.shopee.co.id/file/9b4029f62c483554dca45d8ea6529adb" alt="">
+                        </div>
+                        <div class="deskripsi-menu">
+                            <div class="nama"> Tteokbokki </div>
+                            <div class="desc"> Tteokbokki atau kue beras dengan tekstur kenyal dan saus merah yang pedas manis. </div>
+                            <div class="harga"></div>
+                            <div class="component">
+                                <button class="icon minus">-</button>
+                                <div class="icon nol">0</div>
+                                <button class="icon plus">+</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="bills">
-            <div class="bill-title">Ringkasan Pesanan</div>
-            <hr class="top-line">
-            <div class="order-item">Nama</div>
-            <hr class="total-line">
-            <div class="total">
-                <div class="total-text">Total</div>
-                <div class="total-number">Rp 100.000</div>
+            <div class="bills">
+                <div class="bill-title">Ringkasan Pesanan</div>
+                <hr class="top-line">
+                <div class="order-item">Nama</div>
+                <hr class="total-line">
+                <div class="total">
+                    <div class="total-text">Total</div>
+                    <div class="total-number">Rp 100.000</div>
+                </div>
+                <button id="sendMessageButton" class="pesan-button">Pesan Sekarang</button>
             </div>
-            <button id="sendMessageButton" class="pesan-button">Pesan Sekarang</button>
         </div>
+        <div class="footer">graciellavl</div>
     </div>
+
     <!-- LIFF ID ERROR -->
     <div id="liffIdErrorMessage" class="hidden">
         <p>You have not assigned any value for LIFF ID.</p>
@@ -86,7 +90,6 @@
     <div id="nodeLiffIdErrorMessage" class="hidden">
         <p>Unable to receive the LIFF ID as an environment variable.</p>
     </div>
-    <div class="footer">graciellavl</div>
     <script src="index.js"></script>
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </body>
