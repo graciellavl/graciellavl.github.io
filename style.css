@@ -194,7 +194,7 @@ hr {
     .title {
         font-size: 18px;
     }
-    .login{
+    .login, .login-text, .display-name{
         font-size: 14px;
     }
     .choice {

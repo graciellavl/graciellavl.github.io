@@ -70,9 +70,10 @@ function initializeApp() {
     if (liff.isLoggedIn()) {
         document.getElementById('liffLoginButton').classList.add("hidden");
         document.getElementById('liffLogoutButton').classList.remove("hidden");
+
         liff.getProfile().then(function(profile) {
-            document.getElementById('userIdProfileField').textContent = profile.userId;
-            // document.getElementById('displayNameField').textContent = profile.displayName;
+            // document.getElementById('userIdProfileField').textContent = profile.userId;
+            document.getElementById('displayNameField').textContent = profile.displayName;
 
             const profilePictureDiv = document.getElementById('profilePictureDiv');
             if (profilePictureDiv.firstElementChild) {
