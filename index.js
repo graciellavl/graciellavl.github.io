@@ -76,6 +76,8 @@ function initializeApp() {
         if (liff.isInClient()) {
             document.getElementById('liffLoginButton').classList.add('hidden');
             document.getElementById('liffLogoutButton').classList.add('hidden');
+            document.getElementById('openWindowButton').classList.remove('hidden');
+            document.getElementById('closeWindowButton').classList.remove('hidden');
         }
         liff.getProfile().then(function(profile) {
             // document.getElementById('userIdProfileField').textContent = profile.userId;
