@@ -161,7 +161,7 @@ function registerButtonHandlers() {
     // openWindow call
     document.getElementById('openWindowButton').addEventListener('click', function() {
         liff.openWindow({
-            url: 'https://liff-food-order.netlify.app/',
+            url: 'https://liff-food-order.herokuapp.com',
             external: true
         });
     });
