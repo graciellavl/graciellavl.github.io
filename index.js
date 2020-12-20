@@ -146,7 +146,7 @@ function callPesanan() {
         var nama = document.getElementById(listnama[i]).innerHTML;
         var harga = document.getElementById(listharga[i]).innerHTML;
         var qty = document.getElementById(jumlah[i]).innerHTML;
-        pesanan += `${i}. ${nama}(${qty}) - ${harga*qty}\n`;
+        pesanan += `${i+1}. ${nama}(${qty}) - ${harga*qty}\n`;
     }
     pesanan += `Total : ${document.getElementById('total').innerHTML}\n\n`;
     pesanan += 'Selamat menikmati!';
@@ -176,9 +176,10 @@ function registerButtonHandlers() {
         if (!liff.isInClient()) {
             sendAlertIfNotInClient();
         } else {
+            callPesanan();
             liff.sendMessages([{
                 'type': 'text',
-                'text': callPesanan()
+                'text': pesanan
             }]).then(function() {
                 window.alert('Message sent');
             }).catch(function(error) {
