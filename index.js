@@ -68,11 +68,13 @@ function initializeApp() {
 
     // check if the user is logged in/out, and disable inappropriate button
     if (liff.isLoggedIn()) {
-        document.getElementById('liffLoginButton').display = "none";
+        document.getElementById('liffLoginButton').classList.add("hidden");
+        document.getElementById('displayNameField').classList.remove("hidden");
+        document.getElementById('displayNameField').textContent = profile.displayName;
     } 
-    // else {
-    //     document.getElementById('liffLogoutButton').disabled = true;
-    // }
+    else {
+        document.getElementById('liffLogoutButton').classList.add("hidden");
+    }
 }
 
 /**
@@ -90,16 +92,16 @@ function initializeApp() {
 /**
 * Toggle the login/logout buttons based on the isInClient status, and display a message accordingly
 */
-// function displayIsInClientInfo() {
-//     if (liff.isInClient()) {
-//         document.getElementById('liffLoginButton').classList.toggle('hidden');
-//         document.getElementById('liffLogoutButton').classList.toggle('hidden');
-//         document.getElementById('isInClientMessage').textContent = 'You are opening the app in the in-app browser of LINE.';
-//     } else {
-//         document.getElementById('isInClientMessage').textContent = 'You are opening the app in an external browser.';
-//         document.getElementById('shareTargetPicker').classList.toggle('hidden');
-//     }
-// }
+function displayIsInClientInfo() {
+    if (liff.isInClient()) {
+        document.getElementById('liffLoginButton').classList.toggle('hidden');
+        document.getElementById('liffLogoutButton').classList.toggle('hidden');
+        // document.getElementById('isInClientMessage').textContent = 'You are opening the app in the in-app browser of LINE.';
+    } else {
+        // document.getElementById('isInClientMessage').textContent = 'You are opening the app in an external browser.';
+        // document.getElementById('shareTargetPicker').classList.toggle('hidden');
+    }
+}
 
 /**
 * Register event handlers for the buttons displayed in the app
@@ -209,12 +211,12 @@ function registerButtonHandlers() {
     });
 
     // logout call only when external browse
-    // document.getElementById('liffLogoutButton').addEventListener('click', function() {
-    //     if (liff.isLoggedIn()) {
-    //         liff.logout();
-    //         window.location.reload();
-    //     }
-    // });
+    document.getElementById('liffLogoutButton').addEventListener('click', function() {
+        if (liff.isLoggedIn()) {
+            liff.logout();
+            window.location.reload();
+        }
+    });
 }
 
 /**
