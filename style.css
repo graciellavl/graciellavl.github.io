@@ -21,13 +21,21 @@ body {
 
 .login {
     position: absolute;
-    font-size: 28px;
     margin-top: 2%;
     right: 8%;
+    display: flex;
+}
+.display-name {
+    font-size: 28px;
     border: none;
     background-color: #DDD2C0;
 }
-.login:hover{
+.login-text {
+    font-size: 28px;
+    border: none;
+    background-color: #DDD2C0;
+}
+.login-text:hover{
     cursor: pointer;
 }
 

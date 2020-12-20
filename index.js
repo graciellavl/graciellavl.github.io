@@ -63,18 +63,23 @@ function initializeLiff(myLiffId) {
  */
 function initializeApp() {
     // displayLiffData();
-    displayIsInClientInfo();
+    // displayIsInClientInfo();
     registerButtonHandlers();
 
     // check if the user is logged in/out, and disable inappropriate button
     if (liff.isLoggedIn()) {
         document.getElementById('liffLoginButton').classList.add("hidden");
-        document.getElementById('displayNameField').classList.remove("hidden");
-        document.getElementById('displayNameField').textContent = profile.displayName;
+        // document.getElementById('displayNameField').classList.remove("hidden");
+        // document.getElementById('displayNameField').textContent = profile.displayName;
     } 
     else {
         document.getElementById('liffLogoutButton').classList.add("hidden");
     }
+    // if (liff.isLoggedIn()) {
+    //     document.getElementById('liffLoginButton').disabled = true;
+    // } else {
+    //     document.getElementById('liffLogoutButton').disabled = true;
+    // }
 }
 
 /**
