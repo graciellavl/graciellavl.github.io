@@ -71,6 +71,8 @@ function initializeApp() {
     if (liff.isLoggedIn()) {
         document.getElementById('liffLoginButton').classList.add("hidden");
         document.getElementById('liffLogoutButton').classList.remove("hidden");
+        document.getElementById('LoginButton').classList.add('hidden');
+        document.getElementById('sendMessageButton').classList.remove('hidden');
         if (liff.isInClient()) {
             document.getElementById('liffLoginButton').classList.add('hidden');
             document.getElementById('liffLogoutButton').classList.add('hidden');
@@ -155,21 +157,21 @@ function callPesanan() {
 
 function registerButtonHandlers() {
     // openWindow call
-    // document.getElementById('openWindowButton').addEventListener('click', function() {
-    //     liff.openWindow({
-    //         url: 'https://liff-food-order.netlify.app/',
-    //         external: true
-    //     });
-    // });
+    document.getElementById('openWindowButton').addEventListener('click', function() {
+        liff.openWindow({
+            url: 'https://liff-food-order.netlify.app/',
+            external: true
+        });
+    });
 
     // closeWindow call
-    // document.getElementById('closeWindowButton').addEventListener('click', function() {
-    //     if (!liff.isInClient()) {
-    //         sendAlertIfNotInClient();
-    //     } else {
-    //         liff.closeWindow();
-    //     }
-    // });
+    document.getElementById('closeWindowButton').addEventListener('click', function() {
+        if (!liff.isInClient()) {
+            sendAlertIfNotInClient();
+        } else {
+            liff.closeWindow();
+        }
+    });
 
     // sendMessages call
     document.getElementById('sendMessageButton').addEventListener('click', function() {
@@ -256,6 +258,13 @@ function registerButtonHandlers() {
             // set `redirectUri` to redirect the user to a URL other than the front page of your LIFF app.
             liff.login();
         }
+    });    
+    
+    document.getElementById('LoginButton').addEventListener('click', function() {
+        if (!liff.isLoggedIn()) {
+            // set `redirectUri` to redirect the user to a URL other than the front page of your LIFF app.
+            liff.login();
+        }
     });
 
     // logout call only when external browse
@@ -321,7 +330,6 @@ function delItem(idCount, nama, harga) {
             listnama = listnama.filter(listnama => listnama !== nama);
             listharga = listharga.filter(listharga => listharga !== harga);
             jumlah = jumlah.filter(jumlah => jumlah !== idCount);
-            console.log("nama", listnama);
             document.getElementById(idCount).innerHTML--;
             appendBills();
         } else {

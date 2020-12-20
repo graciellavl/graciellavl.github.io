@@ -219,6 +219,10 @@ hr {
     margin: 20px auto 0px auto;
 }
 
+.browser-option:hover {
+    font-weight: bold;
+    cursor: pointer;
+}
 .footer {
     background-color: #DDD2C0;
     padding: 2%;
