@@ -134,6 +134,18 @@ function initializeApp() {
 /**
 * Register event handlers for the buttons displayed in the app
 */
+
+var pesanan = '';
+pesanan  += `Hi ${pelanggan}! \n`
+pesanan += 'Kamu memesan: \n'
+for (var i=0; i < listnama.length; i ++){
+    var nama = document.getElementById(listnama[i]).innerHTML;
+    var harga = document.getElementById(listharga[i]).innerHTML;
+    var qty = document.getElementById(jumlah[i]).innerHTML;
+    pesanan += `${i} ${nama}(${qty}) - ${harga*qty}\n`;
+}
+pesanan += `Total : ${document.getElementById('total').innerHTML}`;
+pesanan += 'Selamat menikmati!';
 function registerButtonHandlers() {
     // openWindow call
     // document.getElementById('openWindowButton').addEventListener('click', function() {
@@ -159,8 +171,7 @@ function registerButtonHandlers() {
         } else {
             liff.sendMessages([{
                 'type': 'text',
-                'text': `Hi ${pelanggan}! 
-                \n Total pesananmu ${document.getElementById('total').innerHTML} `
+                'text': pesanan
             }]).then(function() {
                 window.alert('Message sent');
             }).catch(function(error) {
