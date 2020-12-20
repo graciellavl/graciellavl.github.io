@@ -276,9 +276,9 @@ function toggleQrCodeReader() {
 */
 function toggleElement(elementId) {
     const elem = document.getElementById(elementId);
-    if (elem.offsetWidth > 0 && elem.offsetHeight > 0) {
-        elem.style.display = 'none';
-    } else {
-        elem.style.display = 'block';
-    }
+//     if (elem.offsetWidth > 0 && elem.offsetHeight > 0) {
+//         elem.style.display = 'none';
+//     } else {
+//         elem.style.display = 'block';
+//     }
 }
