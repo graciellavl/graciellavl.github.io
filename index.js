@@ -63,14 +63,17 @@ function initializeLiff(myLiffId) {
  */
 function initializeApp() {
     // displayLiffData();
-    displayIsInClientInfo();
+    // displayIsInClientInfo();
     registerButtonHandlers();
 
     // check if the user is logged in/out, and disable inappropriate button
     if (liff.isLoggedIn()) {
         document.getElementById('liffLoginButton').classList.add("hidden");
         document.getElementById('liffLogoutButton').classList.remove("hidden");
-
+        if (liff.isInClient()) {
+            document.getElementById('liffLoginButton').classList.add('hidden');
+            document.getElementById('liffLogoutButton').classList.add('hidden');
+        }
         liff.getProfile().then(function(profile) {
             // document.getElementById('userIdProfileField').textContent = profile.userId;
             document.getElementById('displayNameField').textContent = profile.displayName;
@@ -115,16 +118,16 @@ function initializeApp() {
 /**
 * Toggle the login/logout buttons based on the isInClient status, and display a message accordingly
 */
-function displayIsInClientInfo() {
-    if (liff.isInClient()) {
-        document.getElementById('liffLoginButton').classList.add('hidden');
-        document.getElementById('liffLogoutButton').classList.add('hidden');
-        document.getElementById('isInClientMessage').textContent = 'You are opening the app in the in-app browser of LINE.';
-    } else {
-        document.getElementById('isInClientMessage').textContent = 'You are opening the app in an external browser.';
-        // document.getElementById('shareTargetPicker').classList.toggle('hidden');
-    }
-}
+// function displayIsInClientInfo() {
+//     if (liff.isInClient()) {
+//         document.getElementById('liffLoginButton').classList.add('hidden');
+//         document.getElementById('liffLogoutButton').classList.add('hidden');
+//         // document.getElementById('isInClientMessage').textContent = 'You are opening the app in the in-app browser of LINE.';
+//     } else {
+//         // document.getElementById('isInClientMessage').textContent = 'You are opening the app in an external browser.';
+//         // document.getElementById('shareTargetPicker').classList.toggle('hidden');
+//     }
+// }
 
 /**
 * Register event handlers for the buttons displayed in the app
