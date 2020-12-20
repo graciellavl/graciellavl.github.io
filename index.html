@@ -30,13 +30,13 @@
                     <button class="type on">Korean</button>
                     <button class="type">Western</button>
                     <button class="type">Indonesian</button>
-                    <button class="type">Beverages</button>
-                    <button class="type">Italian</button>
-                    <button class="type">Fruits</button>
-                    <button class="type">Vegetables</button>
-                    <button class="type">Dessert</button>
+                    <button class="type disabled">Beverages</button>
+                    <button class="type disabled">Italian</button>
+                    <button class="type disabled">Fruits</button>
+                    <button class="type disabled">Vegetables</button>
+                    <button class="type disabled">Dessert</button>
                 </div>
-                <div class="menu">
+                <div class="menu" id="kor-food">
                     <div class="menu-title">Korean Food</div>
                     <hr>
                     <div class="isi-menu">
@@ -44,34 +44,74 @@
                             <img class="food-pict" src="https://cf.shopee.co.id/file/9b4029f62c483554dca45d8ea6529adb" alt="">
                         </div>
                         <div class="deskripsi-menu">
-                            <div class="nama"> Tteokbokki </div>
+                            <div class="nama" id="nama-kor"> Tteokbokki </div>
                             <div class="desc"> Tteokbokki atau kue beras dengan tekstur kenyal dan saus merah yang pedas manis. </div>
                             <div class="harga"></div>
                             <div class="component">
-                                <button id="minus" class="icon" onclick="delItem('count')">-</button>
-                                <div id="count" class="icon">0</div>
-                                <button id="plus" class="icon" onclick="addItem('count')">+</button>
+                                <button id="minus" class="icon" onclick="delItem('count-kor', 'nama-kor')">-</button>
+                                <div id="count-kor" class="icon">0</div>
+                                <button id="plus" class="icon" onclick="addItem('count-kor', 'nama-kor')">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu" id="idn-food">
+                    <div class="menu-title">Indonesian Food</div>
+                    <hr>
+                    <div class="isi-menu">
+                        <div class="gambar-makanan">
+                            <img class="food-pict" src="https://cf.shopee.co.id/file/9b4029f62c483554dca45d8ea6529adb" alt="">
+                        </div>
+                        <div class="deskripsi-menu">
+                            <div class="nama" id="nama-idn"> Soto Ayam </div>
+                            <div class="desc"> Tteokbokki atau kue beras dengan tekstur kenyal dan saus merah yang pedas manis. </div>
+                            <div class="harga"></div>
+                            <div class="component">
+                                <button id="minus" class="icon" onclick="delItem('count-idn', 'nama-idn')">-</button>
+                                <div id="count-idn" class="icon">0</div>
+                                <button id="plus" class="icon" onclick="addItem('count-idn', 'nama-idn')">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu" id="west-food">
+                    <div class="menu-title">Western Food</div>
+                    <hr>
+                    <div class="isi-menu">
+                        <div class="gambar-makanan">
+                            <img class="food-pict" src="https://cf.shopee.co.id/file/9b4029f62c483554dca45d8ea6529adb" alt="">
+                        </div>
+                        <div class="deskripsi-menu">
+                            <div class="nama" id="nama-west"> Steak </div>
+                            <div class="desc"> Tteokbokki atau kue beras dengan tekstur kenyal dan saus merah yang pedas manis. </div>
+                            <div class="harga"></div>
+                            <div class="component">
+                                <button id="minus" class="icon" onclick="delItem('count-west', 'nama-west')">-</button>
+                                <div id="count-west" class="icon">0</div>
+                                <button id="plus" class="icon" onclick="addItem('count-west', 'nama-west')">+</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="bills">
-                <div class="bill-title">Ringkasan Pesanan</div>
-                <hr class="top-line">
-                <div class="order-item">
-                    <table id="bills"></table>
+                <div class="bills-detail">
+                    <div class="bill-title">Ringkasan Pesanan</div>
+                    <hr class="top-line">
+                    <div class="order-item" id="scroll-bills">
+                        <table id="bills"></table>
+                    </div>
+                    <hr class="total-line">
+                    <div class="total">
+                        <div class="total-text">Total</div>
+                        <div class="total-number" id="total"></div>
+                    </div>
+                    <button id="sendMessageButton" class="pesan-button">Pesan Sekarang</button>
                 </div>
-                <hr class="total-line">
-                <div class="total">
-                    <div class="total-text">Total</div>
-                    <div class="total-number" id="total"></div>
-                </div>
-                <button id="sendMessageButton" class="pesan-button">Pesan Sekarang</button>
             </div>
         </div>
         <!-- <div id="isInClientMessage"></div> -->
-        <div class="footer">graciellavl</div>
+        <div class="footer">© graciellavl | 2020 </div>
     </div>
 
     <!-- LIFF ID ERROR -->

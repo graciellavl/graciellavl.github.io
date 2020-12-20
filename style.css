@@ -6,6 +6,8 @@ body {
 
 .navbar {
     position: sticky;
+    top: 0;
+    z-index: 10;
     background-color: #DDD2C0;
     width: 100%;
     min-height: 100px;
@@ -159,14 +161,23 @@ img {
 
 .bills {
     /* margin: 20px; */
-    background-color: #DDD2C0;
     /* width: 30%; */
     flex-grow: 1;
-    padding: 3%;
+    min-width: 30%;
+    margin-top: 16px;
+}
+.bills-detail {
+    background-color: #DDD2C0;
+    padding: 5%;
     outline: 1px solid #383E43;
     outline-offset: -10px;
+    position: sticky;
+    top: 120px;
 }
-
+#scroll-bills{
+    max-height: 250px;
+    overflow: auto;
+}
 .bill-title {
     font-family: "Josefin Sans", sans-serif;
     text-align: center;
@@ -241,4 +252,15 @@ hr {
 
 .hidden {
     display: none;
+}
+
+.disabled {
+    opacity: 70%;
+
+}
+.disabled:hover {
+    cursor: not-allowed;
+    background-color: #DDD2C0;
+    color: #383E43;
+    opacity: 70%;
 }

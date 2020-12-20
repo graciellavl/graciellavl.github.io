@@ -287,28 +287,28 @@ function toggleElement(elementId) {
 }
 
 /* Food Function */
-function addItem(idCount) {
+function addItem(idCount, nama) {
     document.getElementById(idCount).innerHTML++;
-    addList(idCount, "Tteokkboki");
+    addList(idCount, document.getElementById(nama).innerHTML);
 }
 
-function delItem(idCount) {
+function delItem(idCount, nama) {
     if (document.getElementById(idCount).innerHTML > 0) {
         document.getElementById(idCount).innerHTML--;
         if (document.getElementById(idCount).innerHTML === 0) {
             document.getElementById("bills").innerHTML = ''
         } else {
-            addList(idCount, "Tteokkboki");
+            addList(idCount, document.getElementById(nama).innerHTML);
         }
     }
 }
 
 function addList(id, nama) {
     var str = '<tr>';
-    str += '<td>'+ nama + '</td>';
+    str += '<td style="font-weight: bold;">'+ nama + '</td>';
     str += '</tr> <tr>';
     str += '<td style="width: 80%">'+ document.getElementById(id).innerHTML + 'x Rp45.000 </td>';
     str += '<td style="text-align: right;">'+ document.getElementById(id).innerHTML*45000 + '</td></tr>';
-    document.getElementById("bills").innerHTML = str;
+    document.getElementById("bills").innerHTML += str;
     document.getElementById("total").innerHTML = document.getElementById(id).innerHTML*45000;
 }
