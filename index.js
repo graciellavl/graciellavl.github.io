@@ -344,7 +344,6 @@ function addList(id, nama, harga) {
         jumlah.push(id);
     }
     appendBills();
-    console.log(callPesanan());
 }
 
 function appendBills() {
