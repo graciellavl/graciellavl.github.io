@@ -71,7 +71,19 @@ function initializeApp() {
         document.getElementById('liffLoginButton').classList.add("hidden");
         document.getElementById('liffLogoutButton').classList.remove("hidden");
         // document.getElementById('displayNameField').classList.remove("hidden");
-        // document.getElementById('displayNameField').textContent = profile.displayName;
+        document.getElementById('displayNameField').textContent = profile.displayName;
+
+        const profilePictureDiv = document.getElementById('profilePictureDiv');
+        if (profilePictureDiv.firstElementChild) {
+            profilePictureDiv.removeChild(profilePictureDiv.firstElementChild);
+        }
+        const img = document.createElement('img');
+        img.src = profile.pictureUrl;
+        img.alt = 'Profile Picture';
+        profilePictureDiv.appendChild(img);
+
+        // document.getElementById('statusMessageField').textContent = profile.statusMessage;
+        toggleProfileData();
     } 
     else {
         document.getElementById('liffLogoutButton').classList.add("hidden");
