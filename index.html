@@ -48,9 +48,9 @@
                             <div class="desc"> Tteokbokki atau kue beras dengan tekstur kenyal dan saus merah yang pedas manis. </div>
                             <div class="harga"></div>
                             <div class="component">
-                                <button class="icon minus">-</button>
-                                <div class="icon nol">0</div>
-                                <button class="icon plus">+</button>
+                                <button id="minus" class="icon" onclick="delItem('count')">-</button>
+                                <div id="count" class="icon">0</div>
+                                <button id="plus" class="icon" onclick="addItem('count')">+</button>
                             </div>
                         </div>
                     </div>
@@ -59,11 +59,13 @@
             <div class="bills">
                 <div class="bill-title">Ringkasan Pesanan</div>
                 <hr class="top-line">
-                <div class="order-item">Nama</div>
+                <div class="order-item">
+                    <table id="bills"></table>
+                </div>
                 <hr class="total-line">
                 <div class="total">
                     <div class="total-text">Total</div>
-                    <div class="total-number">Rp 100.000</div>
+                    <div class="total-number" id="total"></div>
                 </div>
                 <button id="sendMessageButton" class="pesan-button">Pesan Sekarang</button>
             </div>

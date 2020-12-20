@@ -147,13 +147,13 @@ img {
     text-align: center;
     margin: 5px;
 }
-.minus {
+#minus {
     background-color:#CB2317;
 }
-.nol {
+#count {
     background-color:#E5E5E5;
 }
-.plus {
+#plus {
     background-color:#67A836;
 }
 
