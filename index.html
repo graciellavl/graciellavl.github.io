@@ -27,9 +27,9 @@
         <div class="container">
             <div class="content">
                 <div class="choice">
-                    <button class="type on">Korean</button>
-                    <button class="type">Western</button>
-                    <button class="type">Indonesian</button>
+                    <button id = "kor" class="type" onclick="choiceSelected('kor', 'kor-food')">Korean</button>
+                    <button id = "west" class="type" onclick="choiceSelected('west', 'west-food')">Western</button>
+                    <button id = "idn" class="type" onclick="choiceSelected('idn', 'idn-food')">Indonesian</button>
                     <button class="type disabled">Beverages</button>
                     <button class="type disabled">Italian</button>
                     <button class="type disabled">Fruits</button>
@@ -46,11 +46,11 @@
                         <div class="deskripsi-menu">
                             <div class="nama" id="nama-kor"> Tteokbokki </div>
                             <div class="desc"> Tteokbokki atau kue beras dengan tekstur kenyal dan saus merah yang pedas manis. </div>
-                            <div class="harga"></div>
+                            <div class="harga"> Rp. <span id="harga-kor">45000</span></div>
                             <div class="component">
-                                <button id="minus" class="icon" onclick="delItem('count-kor', 'nama-kor')">-</button>
+                                <button id="minus" class="icon" onclick="delItem('count-kor', 'nama-kor', 'harga-kor')">-</button>
                                 <div id="count-kor" class="icon">0</div>
-                                <button id="plus" class="icon" onclick="addItem('count-kor', 'nama-kor')">+</button>
+                                <button id="plus" class="icon" onclick="addItem('count-kor', 'nama-kor', 'harga-kor')">+</button>
                             </div>
                         </div>
                     </div>
@@ -65,11 +65,11 @@
                         <div class="deskripsi-menu">
                             <div class="nama" id="nama-idn"> Soto Ayam </div>
                             <div class="desc"> Tteokbokki atau kue beras dengan tekstur kenyal dan saus merah yang pedas manis. </div>
-                            <div class="harga"></div>
+                            <div class="harga"> Rp. <span id="harga-idn">30000</span></div>
                             <div class="component">
-                                <button id="minus" class="icon" onclick="delItem('count-idn', 'nama-idn')">-</button>
+                                <button id="minus" class="icon" onclick="delItem('count-idn', 'nama-idn', 'harga-idn')">-</button>
                                 <div id="count-idn" class="icon">0</div>
-                                <button id="plus" class="icon" onclick="addItem('count-idn', 'nama-idn')">+</button>
+                                <button id="plus" class="icon" onclick="addItem('count-idn', 'nama-idn', 'harga-idn')">+</button>
                             </div>
                         </div>
                     </div>
@@ -84,11 +84,11 @@
                         <div class="deskripsi-menu">
                             <div class="nama" id="nama-west"> Steak </div>
                             <div class="desc"> Tteokbokki atau kue beras dengan tekstur kenyal dan saus merah yang pedas manis. </div>
-                            <div class="harga"></div>
+                            <div class="harga"> Rp. <span id="harga-west">80000</span></div>
                             <div class="component">
-                                <button id="minus" class="icon" onclick="delItem('count-west', 'nama-west')">-</button>
+                                <button id="minus" class="icon" onclick="delItem('count-west', 'nama-west', 'harga-west')">-</button>
                                 <div id="count-west" class="icon">0</div>
-                                <button id="plus" class="icon" onclick="addItem('count-west', 'nama-west')">+</button>
+                                <button id="plus" class="icon" onclick="addItem('count-west', 'nama-west', 'harga-west')">+</button>
                             </div>
                         </div>
                     </div>

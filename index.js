@@ -61,6 +61,7 @@ function initializeLiff(myLiffId) {
 /**
  * Initialize the app by calling functions handling individual app components
  */
+var pelanggan = '';
 function initializeApp() {
     // displayLiffData();
     // displayIsInClientInfo();
@@ -76,6 +77,7 @@ function initializeApp() {
         }
         liff.getProfile().then(function(profile) {
             // document.getElementById('userIdProfileField').textContent = profile.userId;
+            pelanggan = profile.displayName;
             document.getElementById('displayNameField').textContent = profile.displayName;
 
             const profilePictureDiv = document.getElementById('profilePictureDiv');
@@ -157,7 +159,8 @@ function registerButtonHandlers() {
         } else {
             liff.sendMessages([{
                 'type': 'text',
-                'text': "You've successfully sent a message! Hooray!"
+                'text': `Hi ${pelanggan}! 
+                \n Total pesananmu ${document.getElementById('total').innerHTML} `
             }]).then(function() {
                 window.alert('Message sent');
             }).catch(function(error) {
@@ -287,28 +290,93 @@ function toggleElement(elementId) {
 }
 
 /* Food Function */
-function addItem(idCount, nama) {
+
+var listnama = [];
+var listharga = [];
+var jumlah = [];
+
+function addItem(idCount, nama, harga) {
     document.getElementById(idCount).innerHTML++;
-    addList(idCount, document.getElementById(nama).innerHTML);
+    addList(idCount, nama, harga);
 }
 
-function delItem(idCount, nama) {
+function delItem(idCount, nama, harga) {
     if (document.getElementById(idCount).innerHTML > 0) {
-        document.getElementById(idCount).innerHTML--;
-        if (document.getElementById(idCount).innerHTML === 0) {
-            document.getElementById("bills").innerHTML = ''
+        if (document.getElementById(idCount).innerHTML < 2) {
+            listnama = listnama.filter(listnama => listnama !== nama);
+            listharga = listharga.filter(listharga => listharga !== harga);
+            jumlah = jumlah.filter(jumlah => jumlah !== idCount);
+            console.log("nama", listnama);
+            document.getElementById(idCount).innerHTML--;
+            appendBills();
         } else {
-            addList(idCount, document.getElementById(nama).innerHTML);
+            document.getElementById(idCount).innerHTML--;
+            addList(idCount, nama, harga);
         }
     }
 }
 
-function addList(id, nama) {
-    var str = '<tr>';
-    str += '<td style="font-weight: bold;">'+ nama + '</td>';
-    str += '</tr> <tr>';
-    str += '<td style="width: 80%">'+ document.getElementById(id).innerHTML + 'x Rp45.000 </td>';
-    str += '<td style="text-align: right;">'+ document.getElementById(id).innerHTML*45000 + '</td></tr>';
-    document.getElementById("bills").innerHTML += str;
-    document.getElementById("total").innerHTML = document.getElementById(id).innerHTML*45000;
+function addList(id, nama, harga) {
+    var found = false;
+    for (var i = 0; i < listnama.length && !found; i++) {
+        if (nama === listnama[i]) {
+            found = true;
+        }
+    }
+    if (!found) {
+        listnama.push(nama);
+        listharga.push(harga);
+        jumlah.push(id);
+    }
+    appendBills();
+}
+
+function appendBills() {
+    var str = '';
+    var total = 0;
+    for (var i = 0; i < listnama.length; i++){
+        str += '<tr>';
+        str += '<td style="font-weight: bold;">'+ document.getElementById(listnama[i]).innerHTML + '</td>';
+        str += '</tr> <tr>';
+        str += '<td style="width: 80%">'+ document.getElementById(jumlah[i]).innerHTML + 'x' + document.getElementById(listharga[i]).innerHTML + '</td>';
+        str += '<td style="text-align: right;">'+ document.getElementById(jumlah[i]).innerHTML*document.getElementById(listharga[i]).innerHTML + '</td>';
+        str += '</tr>'
+        total += document.getElementById(jumlah[i]).innerHTML*document.getElementById(listharga[i]).innerHTML
+    }
+    document.getElementById("bills").innerHTML = str;
+    document.getElementById("total").innerHTML = total;
+}
+
+var idSelected = '';
+function choiceSelected(id, item) {
+    if (idSelected === id) {
+        document.getElementById('kor').classList.remove('on');
+        document.getElementById('idn').classList.remove('on');
+        document.getElementById('west').classList.remove('on');
+        idSelected = '';
+    
+        document.getElementById('kor-food').classList.remove('hidden');
+        document.getElementById('idn-food').classList.remove('hidden');
+        document.getElementById('west-food').classList.remove('hidden');
+    } else {
+        document.getElementById(id).classList.add('on');
+        if (idSelected !== '') {
+            document.getElementById(idSelected).classList.remove('on');
+        } 
+
+        idSelected = id;
+        if (item === 'kor-food') {
+            document.getElementById('kor-food').classList.remove('hidden');
+            document.getElementById('idn-food').classList.add('hidden');
+            document.getElementById('west-food').classList.add('hidden');
+        } else if (item === 'idn-food') {
+            document.getElementById('kor-food').classList.add('hidden');
+            document.getElementById('idn-food').classList.remove('hidden');
+            document.getElementById('west-food').classList.add('hidden');
+        } else if (item === 'west-food') {
+            document.getElementById('kor-food').classList.add('hidden');
+            document.getElementById('idn-food').classList.add('hidden');
+            document.getElementById('west-food').classList.remove('hidden');
+        }
+    }
 }
