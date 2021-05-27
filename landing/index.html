@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lncircle</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="/asset/logo_lncircle.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/asset/logo_lncircle.ico" type="image/x-icon" />
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+        </script>
+
+</head>
+
+<script>
+    function validateEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    function SubForm() {
+        if (!document.getElementById("email").value == '') {
+            if (validateEmail(document.getElementById("email").value)) {
+                $.ajax({
+                    url: 'https://api.apispreadsheets.com/data/12953/',
+                    type: 'post',
+                    data: $("#subs").serializeArray(),
+                    success: function () {
+                        swal("Success!", "Stay tuned!", "success");
+                    },
+                    error: function () {
+                        swal("An error occured!", "Please try again later!", "error");
+                    }
+                });
+            } else {
+                swal("An error occured!", "Please input a valid email!", "error");
+            }
+        }
+    }
+</script>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Lexend', sans-serif;
+        color: #333333;
+        display: flex;
+        align-items: center;
+        height: 100vh;
+        margin: auto;
+        justify-content: center;
+        background-color: #f7f6f3;
+        width: 75%;
+    }
+
+    .image {
+        width: 500px;
+    }
+
+    .content {
+        margin-left: 70px;
+    }
+
+    .hashtag {
+        top: 420px;
+        left: 10px;
+        font-size: 32px;
+        position: absolute;
+    }
+
+    .button {
+        width: 100px;
+        margin-left: 10px;
+        background-color: rgb(0, 166, 153);
+        border: none;
+        color: white;
+        border-radius: 8px;
+    }
+
+    .button:hover {
+        cursor: pointer;
+    }
+
+    #email {
+        width: 380px;
+    }
+
+    .subs {
+        display: flex;
+        margin-top: 10px;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .mobile {
+        display: none;
+    }
+
+    .logo {
+        width: 50px;
+    }
+
+    @media (max-width: 1000px) {
+        body {
+            display: block;
+            margin: 0;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .image {
+            width: calc(100vw - 20px);
+        }
+
+        .content {
+            margin: auto;
+        }
+
+        .hashtag {
+            text-align: center;
+        }
+
+        #email {
+            width: 200px;
+        }
+
+        .subs {
+            display: block;
+        }
+
+        .mobile {
+            display: block;
+        }
+
+        .logo {
+            width: 30px;
+        }
+
+        .button {
+            margin-top: 30px;
+            height: 25px;
+            margin-left: 0;
+        }
+    }
+</style>
+
+<body>
+    <img src="./asset/1.png" alt="" class="image">
+    <img src="./asset/logo_lncircle.png" alt="" class="logo" style="position: absolute; top: 20px; left: 20px;">
+    <div class="content">
+        <div style="font-size: 32px; font-weight: 600; margin-top: 8px;">Hello, <br class="mobile" />something great is
+            coming for you!
+        </div>
+        <div style="font-size: 20px; margin-top: 10px;">With the vision of bringing you a new experience for a more
+            meaningful life, our team <span style="color: rgb(0, 166, 153); font-weight: 600;">Lncircle </span>, a small
+            group of people from all around Indonesia will give you a new way to experience your kind of chill
+            activities through
+            our new project!
+        </div>
+        <div class="subs">
+            <form id="subs">
+                <input style="padding: 5px; font-family: 'Lexend', sans-serif; border-radius: 8px;" type="email"
+                    name="email" id="email" placeholder="We'll notify you when it launch!">
+            </form>
+            <button onclick="SubForm()" class="button">Subscribe</button>
+        </div>
+        <div style="font-size: 18px; margin-top: 15px; font-weight: bold;">Stay tune!</div>
+    </div>
+</body>
+
+</html>
