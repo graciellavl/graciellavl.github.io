@@ -45,7 +45,7 @@
         <img src="./asset/logo_lncircle.png" alt="" class="logo"
             style="position: absolute; top: 20px; left: 20px; display: block;">
         <div class="content">
-            <div style="font-size: 32px; font-weight: 600; margin-top: 8px;">Hello, <br class="mobile" />something great
+            <div style="font-size: 32px; font-weight: 600; margin-top: 8px;">Hello, <br class="mobile" />something great <br class="desktop" />
                 is
                 coming for you!
             </div>
@@ -118,7 +118,7 @@
         height: 100vh;
         margin: auto;
         justify-content: center;
-        width: 90%;
+        width: 80%;
     }
 
     .image {
@@ -128,7 +128,7 @@
 
     .content {
         margin-left: 50px;
-        padding-right: 50px;
+        padding-right: 20px;
     }
 
     .hashtag {
@@ -166,6 +166,10 @@
 
     .mobile {
         display: none;
+    }
+
+    .desktop {
+        display: block;
     }
 
     .logo {
@@ -212,6 +216,7 @@
 
         .content {
             margin: auto;
+            padding: 0;
         }
 
         .hashtag {
@@ -228,6 +233,9 @@
 
         .mobile {
             display: block;
+        }
+        .desktop {
+            display: none;
         }
 
         .logo {
