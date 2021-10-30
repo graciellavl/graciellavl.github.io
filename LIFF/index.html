@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Food Menu</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="liffAppContent">
+        <div class="navbar">
+            <!-- <div class="icon"><i class="fa fa-cutlery" aria-hidden="true"></i></div> -->
+            <div class="title">LIFF Food Order</div>
+            <div class="login" id="login-nav">
+                <div class="profile">
+                    <div id="profilePictureDiv"></div>
+                    <div id="displayNameField" class="display-name"></div>
+                </div>
+                <button class="login-text" id="liffLoginButton">Login</button>
+                <button class="login-text hidden" id="liffLogoutButton">Logout</button>
+            </div>
+        </div>
+        <div class="container">
+            <div class="content">
+                <div class="choice">
+                    <button id = "kor" class="type" onclick="choiceSelected('kor', 'kor-food')">Korean</button>
+                    <button id = "west" class="type" onclick="choiceSelected('west', 'west-food')">Western</button>
+                    <button id = "idn" class="type" onclick="choiceSelected('idn', 'idn-food')">Indonesian</button>
+                    <button class="type disabled">Beverages</button>
+                    <button class="type disabled">Italian</button>
+                    <button class="type disabled">Fruits</button>
+                    <button class="type disabled">Vegetables</button>
+                    <button class="type disabled">Dessert</button>
+                </div>
+                <div class="menu" id="kor-food">
+                    <div class="menu-title">Korean Food</div>
+                    <hr>
+                    <div class="isi-menu">
+                        <div class="gambar-makanan">
+                            <img class="food-pict" src="https://cf.shopee.co.id/file/9b4029f62c483554dca45d8ea6529adb" alt="">
+                        </div>
+                        <div class="deskripsi-menu">
+                            <div class="nama" id="nama-kor"> Tteokbokki </div>
+                            <div class="desc"> Tteokbokki atau kue beras dengan tekstur kenyal dan saus merah yang pedas manis. </div>
+                            <div class="harga"> Rp. <span id="harga-kor">45000</span></div>
+                            <div class="component">
+                                <button id="minus" class="icon" onclick="delItem('count-kor', 'nama-kor', 'harga-kor')">-</button>
+                                <div id="count-kor" class="icon">0</div>
+                                <button id="plus" class="icon" onclick="addItem('count-kor', 'nama-kor', 'harga-kor')">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu" id="idn-food">
+                    <div class="menu-title">Indonesian Food</div>
+                    <hr>
+                    <div class="isi-menu">
+                        <div class="gambar-makanan">
+                            <img class="food-pict" src="https://awsimages.detik.net.id/community/media/visual/2017/03/22/d3cb3b7a-aa3a-4e0a-a0d4-83828a40b5d5_43.jpg?w=700&q=90" alt="">
+                        </div>
+                        <div class="deskripsi-menu">
+                            <div class="nama" id="nama-idn"> Soto Ayam </div>
+                            <div class="desc"> Soto ayam adalah makanan khas Indonesia yang berupa sejenis sup ayam dengan kuah yang berwarna kekuningan. </div>
+                            <div class="harga"> Rp. <span id="harga-idn">30000</span></div>
+                            <div class="component">
+                                <button id="minus" class="icon" onclick="delItem('count-idn', 'nama-idn', 'harga-idn')">-</button>
+                                <div id="count-idn" class="icon">0</div>
+                                <button id="plus" class="icon" onclick="addItem('count-idn', 'nama-idn', 'harga-idn')">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu" id="west-food">
+                    <div class="menu-title">Western Food</div>
+                    <hr>
+                    <div class="isi-menu">
+                        <div class="gambar-makanan">
+                            <img class="food-pict" src="https://assets-pergikuliner.com/c6aJUdr31lOmC4tY_ODaBgFoLic=/385x290/smart/https://assets-pergikuliner.com/uploads/image/picture/1282170/picture-1550652957.jpg" alt="">
+                        </div>
+                        <div class="deskripsi-menu">
+                            <div class="nama" id="nama-west"> Steak </div>
+                            <div class="desc"> Steak merupakan olahan daging sapi bakar yang populer. Potongan dagingnya bisa dipilih seperti sirloin, tenderloin, atau ribs. </div>
+                            <div class="harga"> Rp. <span id="harga-west">80000</span></div>
+                            <div class="component">
+                                <button id="minus" class="icon" onclick="delItem('count-west', 'nama-west', 'harga-west')">-</button>
+                                <div id="count-west" class="icon">0</div>
+                                <button id="plus" class="icon" onclick="addItem('count-west', 'nama-west', 'harga-west')">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bills">
+                <div class="bills-detail">
+                    <div class="bill-title">Ringkasan Pesanan</div>
+                    <hr class="top-line">
+                    <div class="order-item" id="scroll-bills">
+                        <table id="bills"></table>
+                    </div>
+                    <hr class="total-line">
+                    <div class="total">
+                        <div class="total-text">Total</div>
+                        <div class="total-number" id="total"></div>
+                    </div>
+                    <button id="sendMessageButton" class="pesan-button hidden">Pesan Sekarang</button>
+                    <button id="LoginButton" class="pesan-button">Login untuk Memesan</button>
+                </div>
+            </div>
+        </div>
+        <!-- <div id="isInClientMessage"></div> -->
+        <div class="footer browser-option hidden" id="openWindowButton">Buka di Browser</div>
+        <div class="footer browser-option hidden" id="closeWindowButton">Tutup Browser</div>
+        <div class="footer">© graciellavl | 2020 </div>
+    </div>
+
+    <!-- LIFF ID ERROR -->
+    <div id="liffIdErrorMessage" class="hidden">
+        <p>You have not assigned any value for LIFF ID.</p>
+        <p>If you are running the app using Node.js, please set the LIFF ID as an environment variable in your Heroku account follwing the below steps: </p>
+        <code id="code-block">
+            <ol>
+                <li>Go to `Dashboard` in your Heroku account.</li>
+                <li>Click on the app you just created.</li>
+                <li>Click on `Settings` and toggle `Reveal Config Vars`.</li>
+                <li>Set `MY_LIFF_ID` as the key and the LIFF ID as the value.</li>
+                <li>Your app should be up and running. Enter the URL of your app in a web browser.</li>
+            </ol>
+        </code>
+        <p>If you are using any other platform, please add your LIFF ID in the <code>index.html</code> file.</p>
+        <p>For more information about how to add your LIFF ID, see <a href="https://developers.line.biz/en/reference/liff/#initialize-liff-app">Initializing the LIFF app</a>.</p>
+    </div>
+    <!-- LIFF INIT ERROR -->
+    <div id="liffInitErrorMessage" class="hidden">
+        <p>Something went wrong with LIFF initialization.</p>
+        <p>LIFF initialization can fail if a user clicks "Cancel" on the "Grant permission" screen, or if an error occurs in the process of <code>liff.init()</code>.</p>
+    </div>
+    <!-- NODE.JS LIFF ID ERROR -->
+    <div id="nodeLiffIdErrorMessage" class="hidden">
+        <p>Unable to receive the LIFF ID as an environment variable.</p>
+    </div>
+    <script src="index.js"></script>
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</body>
