@@ -16,9 +16,9 @@
             console.log("tes");
             const response = await fetch(url);
             // waits until the request completes...
-            const csvData = d3.csvParse(response);
-            console.log(csvData);
-            document.write(JSON.stringify(csvData));
+            console.log(response);
+            const csv = d3.csvParse(response.text());
+            console.log(csv);
         }
 
     </script>
