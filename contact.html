@@ -12,10 +12,10 @@
         const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR9NkbOYEMBXmIwOJcZ-VpXW3BNdB9b8a-VEk9nky9-lnA_v5UOp0Vg-7PYZ1hrmmOSE7AduDhpnzqr/pub?gid=0&single=true&output=csv"
 
         const fetchData = async () => {
-            console.log("tes")
+            console.log("tes");
             const response = await fetch(url);
             // waits until the request completes...
-            console.log(response);
+            console.log(response.text());
         }
     </script>
     <main>
