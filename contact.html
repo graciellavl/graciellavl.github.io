@@ -8,18 +8,17 @@
 </head>
 
 <body onload="fetchData()">
-    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script>
         const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR9NkbOYEMBXmIwOJcZ-VpXW3BNdB9b8a-VEk9nky9-lnA_v5UOp0Vg-7PYZ1hrmmOSE7AduDhpnzqr/pub?gid=0&single=true&output=csv"
 
-        const fetchData = async () => {
-            console.log("tes");
-            const response = await fetch(url);
-            // waits until the request completes...
-            console.log(response);
-            const csv = d3.csvParse(response.text());
-            console.log(csv);
-        }
+        fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "text/csv"
+            }
+        })
+        .then(response => {data = response.text(); console.log(data)})
+        .catch(error => console.log(error))
 
     </script>
     <main>
