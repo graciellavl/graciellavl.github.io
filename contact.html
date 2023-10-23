@@ -7,49 +7,19 @@
     <title>graciellavl@</title>
 </head>
 
-<body>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-
+<body onload="fetchData()">
     <script>
-        const CLIENT_ID = "917420405569-cqethvnjg18o33n0a8odqm80b2p60p4l.apps.googleusercontent.com"
-        const source = {
-            "spreadsheetId": "1V96HOB_BDihVr5zfefm0ResLj49cWqSBeV16YZVdCO8",
-            "range": "Sheet1!A:D"
-        }
+        const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR9NkbOYEMBXmIwOJcZ-VpXW3BNdB9b8a-VEk9nky9-lnA_v5UOp0Vg-7PYZ1hrmmOSE7AduDhpnzqr/pub?gid=0&single=true&output=csv"
 
-        window.onload = () => {
-            google.accounts.id.initialize({
-                client_id: CLIENT_ID,
-                callback: callback()
-            });
-            google.accounts.id.prompt();
-            getValues(source.spreadsheetId, source.range);
-        };
-
-        function callback() {
-            console.log("callback")
-        }
-
-        function getValues(spreadsheetId, range, callback) {
-            try {
-                google.accounts.id.spreadsheets.values.get({
-                    spreadsheetId: spreadsheetId,
-                    range: range,
-                }).then((response) => {
-                    const result = response.result;
-                    const numRows = result.values ? result.values.length : 0;
-                    console.log(`${numRows} rows retrieved.`);
-                    if (callback) callback(response);
-                });
-            } catch (err) {
-                document.getElementById('content').innerText = err.message;
-                return;
-            }
+        const fetchData = async () => {
+            console.log("tes")
+            const response = await fetch(url);
+            // waits until the request completes...
+            console.log(response);
         }
     </script>
     <main>
-        <h1>graciellavl.github.io</h1>
-        <p id="content">Our website is under construction.</p>
+        <h1>Loading</h1>
     </main>
 </body>
 
