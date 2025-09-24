@@ -71,7 +71,7 @@
 
         <!-- Main Calculator Section -->
         <section class="space-y-6">
-            <!-- The three-column layout for the disciplines -->
+            <!-- The three-column layout for the disciplines, which collapses to a single column on mobile -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Swim Section -->
                 <div class="bg-blue-50 p-6 rounded-2xl border border-blue-200 shadow-inner">
@@ -184,11 +184,12 @@
                 </div>
             </div>
 
-            <div class="flex justify-center space-x-4 mt-6">
-                <button id="add-transitions-btn" class="flex-1 max-w-xs bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-xl shadow-md hover:bg-gray-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2">
+            <!-- This div now handles button layout on both mobile (stacked) and desktop (side-by-side) -->
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mt-6">
+                <button id="add-transitions-btn" class="w-full sm:w-auto bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-xl shadow-md hover:bg-gray-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2">
                     Add Transitions
                 </button>
-                <button id="calculate-btn" class="flex-1 max-w-xs bg-indigo-600 text-white font-bold py-3 px-6 rounded-xl shadow-lg hover:bg-indigo-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transform hover:scale-105">
+                <button id="calculate-btn" class="w-full sm:w-auto bg-indigo-600 text-white font-bold py-3 px-6 rounded-xl shadow-lg hover:bg-indigo-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transform hover:scale-105">
                     Calculate Total Time
                 </button>
             </div>
@@ -201,21 +202,25 @@
                 <!-- Individual Time Breakdown -->
                 <div class="bg-white p-4 rounded-xl shadow-sm">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Stage Times</h3>
-                    <div class="space-y-2 text-left text-lg font-medium">
-                        <div class="flex justify-between items-center text-blue-700">
-                            <span>🏊 Swim:</span>
+                    <div class="space-y-4 text-left text-lg font-medium">
+                        <!-- Swim -->
+                        <div class="flex flex-col sm:flex-row sm:justify-between items-center sm:items-baseline">
+                            <span class="text-blue-700 mb-1 sm:mb-0">🏊 Swim:</span>
                             <span id="swim-time-display" class="font-mono text-gray-700">00h 00m 00s</span>
                         </div>
-                        <div class="flex justify-between items-center text-green-700">
-                            <span>🚴 Bike:</span>
+                        <!-- Bike -->
+                        <div class="flex flex-col sm:flex-row sm:justify-between items-center sm:items-baseline">
+                            <span class="text-green-700 mb-1 sm:mb-0">🚴 Bike:</span>
                             <span id="bike-time-display" class="font-mono text-gray-700">00h 00m 00s</span>
                         </div>
-                        <div class="flex justify-between items-center text-red-700">
-                            <span>🏃 Run:</span>
+                        <!-- Run -->
+                        <div class="flex flex-col sm:flex-row sm:justify-between items-center sm:items-baseline">
+                            <span class="text-red-700 mb-1 sm:mb-0">🏃 Run:</span>
                             <span id="run-time-display" class="font-mono text-gray-700">00h 00m 00s</span>
                         </div>
-                        <div class="flex justify-between items-center text-yellow-700">
-                            <span>⏱️ Transitions:</span>
+                        <!-- Transitions -->
+                        <div class="flex flex-col sm:flex-row sm:justify-between items-center sm:items-baseline">
+                            <span class="text-yellow-700 mb-1 sm:mb-0">⏱️ Transitions:</span>
                             <span id="transition-time-display" class="font-mono text-gray-700">00h 00m 00s</span>
                         </div>
                     </div>
@@ -236,26 +241,26 @@
 
                 <!-- Cut-off Status -->
                 <div class="md:col-span-2 bg-white p-4 rounded-xl shadow-sm mt-4">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Cut-off Status</h3>
-                    <div class="space-y-2 text-left text-lg font-medium">
-                        <div class="flex justify-between items-center">
-                            <span>🏊 Swim Cut-off:</span>
-                            <div class="flex-1 text-right">
-                                <span id="swim-calculated-time" class="font-mono text-gray-700 mr-2">00h 00m 00s</span>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">Cut-off Status</h3>
+                    <div class="space-y-4 text-lg font-medium">
+                        <div class="flex flex-col items-center sm:flex-row sm:justify-between">
+                            <span class="mb-1 sm:mb-0">🏊 Swim Cut-off:</span>
+                            <div class="flex flex-col items-center sm:flex-row sm:items-center">
+                                <span id="swim-calculated-time" class="font-mono text-gray-700 sm:mr-2">00h 00m 00s</span>
                                 <span id="swim-cutoff-status" class="font-bold"></span>
                             </div>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span>🚴 Bike Cut-off:</span>
-                            <div class="flex-1 text-right">
-                                <span id="bike-calculated-time" class="font-mono text-gray-700 mr-2">00h 00m 00s</span>
+                        <div class="flex flex-col items-center sm:flex-row sm:justify-between">
+                            <span class="mb-1 sm:mb-0">🚴 Bike Cut-off:</span>
+                            <div class="flex flex-col items-center sm:flex-row sm:items-center">
+                                <span id="bike-calculated-time" class="font-mono text-gray-700 sm:mr-2">00h 00m 00s</span>
                                 <span id="bike-cutoff-status" class="font-bold"></span>
                             </div>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span>🏃 Run Cut-off:</span>
-                            <div class="flex-1 text-right">
-                                <span id="run-calculated-time" class="font-mono text-gray-700 mr-2">00h 00m 00s</span>
+                        <div class="flex flex-col items-center sm:flex-row sm:justify-between">
+                            <span class="mb-1 sm:mb-0">🏃 Run Cut-off:</span>
+                            <div class="flex flex-col items-center sm:flex-row sm:items-center">
+                                <span id="run-calculated-time" class="font-mono text-gray-700 sm:mr-2">00h 00m 00s</span>
                                 <span id="run-cutoff-status" class="font-bold"></span>
                             </div>
                         </div>
@@ -400,8 +405,8 @@
                     swimCutoffMInput.value = 10;
                     bikeCutoffHInput.value = 3;
                     bikeCutoffMInput.value = 0;
-                    runCutoffHInput.value = 4; // Updated to 4 hours
-                    runCutoffMInput.value = 30; // Updated to 30 minutes
+                    runCutoffHInput.value = 4;
+                    runCutoffMInput.value = 30;
                     break;
                 case 'half-ironman':
                     swimDistanceInput.value = 1900;
