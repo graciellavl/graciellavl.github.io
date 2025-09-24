@@ -1,56 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>graciellavl@</title>
-    <style type="text/css">
-      html, body {
-        height: 100%;
-      }
-      body {
-        background-color: #fff;
-        background: radial-gradient(circle at center, #fff 0%, #f8f8f8 75%, #ebebeb 100%);
-        color: #222;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        font-size: 1rem;
-        line-height: 1.5;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      main {
-        padding: 1rem;
-        text-align: center;
-      }
-      h1 {
-        font-size: 2.5rem;
-        line-height: 1.1;
-        margin: 0;
-      }
-      @media screen and (max-width: 480px) {
-        h1 {
-          font-size: 1.5rem;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>graciellavl.me - Under Construction</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Favicon: Sprout Emoji -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14'>🌱</text></svg>" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: #ffffff; /* Solid white background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
-      }
-      h1::after {
-        content: "";
-        background-color: #ffe800;
-        background: repeating-linear-gradient(45deg, #ffe800, #ffe800 0.5rem, #222 0.5rem, #222 1.0rem);
-        display: block;
-        height: 0.5rem;
-        margin-top: 1rem;
-      }
-      p {
-        margin: 1rem 0 0 0;
-      }
+
+        /* Custom CSS for the zebra pattern */
+        .zebra-bar {
+            height: 8px;
+            width: 250px;
+            background: repeating-linear-gradient(
+                -45deg,
+                #fcd900,
+                #fcd900 10px,
+                #333 10px,
+                #333 20px
+            );
+        }
+
+        /* Glass Effect UI for buttons */
+        .glass-link {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-link:hover {
+            background-color: #fcd900; /* Yellow hover background */
+            transform: translateY(-2px);
+        }
     </style>
-  </head>
-  <body>
-    <main>
-      <h1>graciellavl.github.io</h1>
-      <p>Our website is under construction.</p>
-    </main>
-  </body>
+</head>
+<body class="p-4">
+
+    <div class="flex flex-col items-center max-w-sm w-full text-center">
+        <!-- Site Title/URL -->
+        <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-2">graciellavl.me</h1>
+        
+        <!-- Under Construction Bar -->
+        <div class="zebra-bar mb-6 rounded-full"></div>
+        
+        <!-- Under Construction Message -->
+        <p class="text-gray-600 mb-8 w-full">Our website is under construction. In the meantime, here's a few places to find me:</p>
+
+        <!-- Link Buttons Section -->
+        <div class="w-full space-y-4">
+            <!-- LinkedIn Link -->
+            <a href="https://www.linkedin.com/in/graciellavl/" target="_blank" class="glass-link grid grid-cols-[2rem_1fr] gap-x-2 w-full px-6 py-4 text-gray-800 font-semibold rounded-md items-start">
+                <i class="fab fa-linkedin text-lg pt-1"></i>
+                <div class="flex flex-col items-start">
+                    <span>LinkedIn</span>
+                    <span class="text-xs text-gray-600 font-normal">Graciella Valeska Liander</span>
+                </div>
+            </a>
+            <!-- Instagram Link -->
+            <a href="https://www.instagram.com/graciellavl/" target="_blank" class="glass-link grid grid-cols-[2rem_1fr] gap-x-2 w-full px-6 py-4 text-gray-800 font-semibold rounded-md items-start">
+                <i class="fab fa-instagram text-lg pt-1"></i>
+                <div class="flex flex-col items-start">
+                    <span>Instagram</span>
+                    <span class="text-xs text-gray-600 font-normal">@graciellavl</span>
+                </div>
+            </a>
+            <!-- Medium Link -->
+            <a href="https://graciellavl.medium.com/" target="_blank" class="glass-link grid grid-cols-[2rem_1fr] gap-x-2 w-full px-6 py-4 text-gray-800 font-semibold rounded-md items-start">
+                <i class="fab fa-medium text-lg pt-1"></i>
+                <div class="flex flex-col items-start">
+                    <span>Medium</span>
+                    <span class="text-xs text-gray-600 font-normal">@graciellavl</span>
+                </div>
+            </a>
+            <!-- Sport Diary Link -->
+            <a href="https://www.instagram.com/_.classyellas._/" target="_blank" class="glass-link grid grid-cols-[2rem_1fr] gap-x-2 w-full px-6 py-4 text-gray-800 font-semibold rounded-md items-start">
+                <i class="fas fa-dumbbell text-lg pt-1"></i>
+                <div class="flex flex-col items-start">
+                    <span>Sport diary</span>
+                    <span class="text-xs text-gray-600 font-normal">@_.classyellas._</span>
+                </div>
+            </a>
+            <!-- Music Diary Link -->
+            <a href="https://www.instagram.com/classyellas/" target="_blank" class="glass-link grid grid-cols-[2rem_1fr] gap-x-2 w-full px-6 py-4 text-gray-800 font-semibold rounded-md items-start">
+                <i class="fas fa-music text-lg pt-1"></i>
+                <div class="flex flex-col items-start">
+                    <span>Music diary</span>
+                    <span class="text-xs text-gray-600 font-normal">@classyellas</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+</body>
 </html>
