@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triathlon Time Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #333;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <main class="w-full max-w-4xl bg-white rounded-3xl shadow-2xl p-8 space-y-8">
+        <header class="text-center space-y-2">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">Triathlon Time Calculator</h1>
+            <p class="text-lg text-gray-600">Calculate your total race time based on your average pace and distance.</p>
+        </header>
+
+        <!-- Race Distance Presets Section -->
+        <section class="space-y-4">
+            <label for="race-distance-select" class="block text-sm font-medium text-gray-700">Choose a Race Distance Preset:</label>
+            <select id="race-distance-select" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 transition-colors duration-200 p-3">
+                <option value="custom">Custom Distance</option>
+                <option value="sprint">Sprint (750m Swim, 20km Bike, 5km Run)</option>
+                <option value="olympic" selected>Olympic (1500m Swim, 40km Bike, 10km Run)</option>
+                <option value="half-ironman">Half Ironman (1.9km Swim, 90km Bike, 21.1km Run)</option>
+                <option value="ironman">Ironman (3.8km Swim, 180km Bike, 42.2km Run)</option>
+            </select>
+        </section>
+
+        <!-- Main Calculator Section -->
+        <section class="space-y-6">
+            <!-- The three-column layout for the disciplines -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Swim Section -->
+                <div class="bg-blue-50 p-6 rounded-2xl border border-blue-200 shadow-inner">
+                    <h2 class="text-2xl font-bold text-blue-800 mb-4">🏊 Swim</h2>
+                    <div class="flex flex-col space-y-4">
+                        <label>
+                            <span class="block text-sm font-medium text-gray-700 mb-1">Distance (meters)</span>
+                            <input id="swim-distance" type="number" min="0" value="1500" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 transition-colors duration-200 p-3">
+                        </label>
+                        <label>
+                            <span class="block text-sm font-medium text-gray-700 mb-1">Pace (minutes per 100 meters)</span>
+                            <input id="swim-pace" type="number" min="0" step="0.01" value="1.5" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 transition-colors duration-200 p-3">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Bike Section -->
+                <div class="bg-green-50 p-6 rounded-2xl border border-green-200 shadow-inner">
+                    <h2 class="text-2xl font-bold text-green-800 mb-4">🚴 Bike</h2>
+                    <div class="flex flex-col space-y-4">
+                        <label>
+                            <span class="block text-sm font-medium text-gray-700 mb-1">Distance (kilometers)</span>
+                            <input id="bike-distance" type="number" min="0" value="40" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 transition-colors duration-200 p-3">
+                        </label>
+                        <label>
+                            <span class="block text-sm font-medium text-gray-700 mb-1">Speed (km/h)</span>
+                            <input id="bike-speed" type="number" min="0" step="0.1" value="30" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 transition-colors duration-200 p-3">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Run Section -->
+                <div class="bg-red-50 p-6 rounded-2xl border border-red-200 shadow-inner">
+                    <h2 class="text-2xl font-bold text-red-800 mb-4">🏃 Run</h2>
+                    <div class="flex flex-col space-y-4">
+                        <label>
+                            <span class="block text-sm font-medium text-gray-700 mb-1">Distance (kilometers)</span>
+                            <input id="run-distance" type="number" min="0" value="10" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 transition-colors duration-200 p-3">
+                        </label>
+                        <label>
+                            <span class="block text-sm font-medium text-gray-700 mb-1">Pace (minutes per km)</span>
+                            <input id="run-pace" type="number" min="0" step="0.01" value="5" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 transition-colors duration-200 p-3">
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transition Section (initially hidden) -->
+            <div id="transition-section" class="bg-yellow-50 p-6 rounded-2xl border border-yellow-200 shadow-inner hidden">
+                <h2 class="text-2xl font-bold text-yellow-800 mb-4">⏱️ Transitions</h2>
+                <div class="flex flex-col md:flex-row md:space-x-6 space-y-4 md:space-y-0">
+                    <div class="flex-1 flex items-center space-x-4">
+                        <div class="text-lg font-bold">T1</div>
+                        <label class="flex-1">
+                            <span class="block text-sm font-medium text-gray-700 mb-1">Minutes</span>
+                            <input id="t1-m" type="number" min="0" max="59" value="0" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-200 transition-colors duration-200 p-3">
+                        </label>
+                        <label class="flex-1">
+                            <span class="block text-sm font-medium text-gray-700 mb-1">Seconds</span>
+                            <input id="t1-s" type="number" min="0" max="59" value="0" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-200 transition-colors duration-200 p-3">
+                        </label>
+                    </div>
+                    <div class="flex-1 flex items-center space-x-4">
+                        <div class="text-lg font-bold">T2</div>
+                        <label class="flex-1">
+                            <span class="block text-sm font-medium text-gray-700 mb-1">Minutes</span>
+                            <input id="t2-m" type="number" min="0" max="59" value="0" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-200 transition-colors duration-200 p-3">
+                        </label>
+                        <label class="flex-1">
+                            <span class="block text-sm font-medium text-gray-700 mb-1">Seconds</span>
+                            <input id="t2-s" type="number" min="0" max="59" value="0" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-200 transition-colors duration-200 p-3">
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center space-x-4 mt-6">
+                <button id="add-transitions-btn" class="flex-1 max-w-xs bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-xl shadow-md hover:bg-gray-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2">
+                    Add Transitions
+                </button>
+                <button id="calculate-btn" class="flex-1 max-w-xs bg-indigo-600 text-white font-bold py-3 px-6 rounded-xl shadow-lg hover:bg-indigo-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transform hover:scale-105">
+                    Calculate Total Time
+                </button>
+            </div>
+        </section>
+
+        <!-- Total Time Result Section -->
+        <section id="result-section" class="bg-gray-100 p-8 rounded-2xl shadow-inner text-center hidden">
+            <h2 class="text-2xl font-extrabold text-gray-800 mb-4">Results</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Individual Time Breakdown -->
+                <div class="bg-white p-4 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Stage Times</h3>
+                    <div class="space-y-2 text-left text-lg font-medium">
+                        <div class="flex justify-between items-center text-blue-700">
+                            <span>🏊 Swim:</span>
+                            <span id="swim-time-display" class="font-mono text-gray-700">00h 00m 00s</span>
+                        </div>
+                        <div class="flex justify-between items-center text-green-700">
+                            <span>🚴 Bike:</span>
+                            <span id="bike-time-display" class="font-mono text-gray-700">00h 00m 00s</span>
+                        </div>
+                        <div class="flex justify-between items-center text-red-700">
+                            <span>🏃 Run:</span>
+                            <span id="run-time-display" class="font-mono text-gray-700">00h 00m 00s</span>
+                        </div>
+                        <div class="flex justify-between items-center text-yellow-700">
+                            <span>⏱️ Transitions:</span>
+                            <span id="transition-time-display" class="font-mono text-gray-700">00h 00m 00s</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Time Display -->
+                <div class="bg-white p-4 rounded-xl shadow-sm flex flex-col justify-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Total Time</h3>
+                    <div class="flex items-center justify-center space-x-2">
+                        <span id="total-h" class="text-4xl font-mono font-bold text-indigo-600">00</span>
+                        <span class="text-xl text-gray-500">h</span>
+                        <span id="total-m" class="text-4xl font-mono font-bold text-indigo-600">00</span>
+                        <span class="text-xl text-gray-500">m</span>
+                        <span id="total-s" class="text-4xl font-mono font-bold text-indigo-600">00</span>
+                        <span class="text-xl text-gray-500">s</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Message Box -->
+        <div id="message-box" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full text-center">
+                <p id="message-text" class="text-lg text-gray-800 font-medium mb-4"></p>
+                <button id="message-ok-btn" class="bg-indigo-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-indigo-700 transition-colors">OK</button>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // DOM element references
+        const swimDistanceInput = document.getElementById('swim-distance');
+        const swimPaceInput = document.getElementById('swim-pace');
+        const bikeDistanceInput = document.getElementById('bike-distance');
+        const bikeSpeedInput = document.getElementById('bike-speed');
+        const runDistanceInput = document.getElementById('run-distance');
+        const runPaceInput = document.getElementById('run-pace'); // Changed ID
+        const t1MInput = document.getElementById('t1-m');
+        const t1SInput = document.getElementById('t1-s');
+        const t2MInput = document.getElementById('t2-m');
+        const t2SInput = document.getElementById('t2-s');
+        const raceDistanceSelect = document.getElementById('race-distance-select');
+        const calculateBtn = document.getElementById('calculate-btn');
+        const addTransitionsBtn = document.getElementById('add-transitions-btn');
+        const transitionSection = document.getElementById('transition-section');
+        const resultSection = document.getElementById('result-section');
+        const swimTimeDisplay = document.getElementById('swim-time-display');
+        const bikeTimeDisplay = document.getElementById('bike-time-display');
+        const runTimeDisplay = document.getElementById('run-time-display');
+        const transitionTimeDisplay = document.getElementById('transition-time-display');
+        const totalHSpan = document.getElementById('total-h');
+        const totalMSpan = document.getElementById('total-m');
+        const totalSSpan = document.getElementById('total-s');
+        const messageBox = document.getElementById('message-box');
+        const messageText = document.getElementById('message-text');
+        const messageOkBtn = document.getElementById('message-ok-btn');
+
+        // Function to show a custom message box
+        const showMessage = (message) => {
+            messageText.textContent = message;
+            messageBox.classList.remove('hidden');
+        };
+
+        messageOkBtn.addEventListener('click', () => {
+            messageBox.classList.add('hidden');
+        });
+
+        const setRaceDistances = (event) => {
+            const distance = event.target.value;
+            switch (distance) {
+                case 'sprint':
+                    swimDistanceInput.value = 750;
+                    bikeDistanceInput.value = 20;
+                    runDistanceInput.value = 5;
+                    break;
+                case 'olympic':
+                    swimDistanceInput.value = 1500;
+                    bikeDistanceInput.value = 40;
+                    runDistanceInput.value = 10;
+                    break;
+                case 'half-ironman':
+                    swimDistanceInput.value = 1900;
+                    bikeDistanceInput.value = 90;
+                    runDistanceInput.value = 21.1;
+                    break;
+                case 'ironman':
+                    swimDistanceInput.value = 3800;
+                    bikeDistanceInput.value = 180;
+                    runDistanceInput.value = 42.2;
+                    break;
+                case 'custom':
+                default:
+                    break;
+            }
+        };
+        
+        // Function to format time in HH:MM:SS
+        const formatTime = (totalSeconds) => {
+            const h = Math.floor(totalSeconds / 3600);
+            const m = Math.floor((totalSeconds % 3600) / 60);
+            const s = Math.round(totalSeconds % 60);
+            const formattedH = String(h).padStart(2, '0');
+            const formattedM = String(m).padStart(2, '0');
+            const formattedS = String(s).padStart(2, '0');
+            return `${formattedH}h ${formattedM}m ${formattedS}s`;
+        };
+
+        const calculateTotalTime = () => {
+            // Get values from input fields
+            const swimDistance = parseFloat(swimDistanceInput.value) || 0;
+            const swimPace = parseFloat(swimPaceInput.value) || 0;
+            const bikeDistance = parseFloat(bikeDistanceInput.value) || 0;
+            const bikeSpeed = parseFloat(bikeSpeedInput.value) || 0;
+            const runDistance = parseFloat(runDistanceInput.value) || 0;
+            const runPace = parseFloat(runPaceInput.value) || 0;
+
+            if (swimPace <= 0 && swimDistance > 0) {
+                 showMessage('Please enter a Swim Pace greater than 0.');
+                 return;
+            }
+            if (bikeSpeed <= 0 && bikeDistance > 0) {
+                 showMessage('Please enter a Bike Speed greater than 0.');
+                 return;
+            }
+            if (runPace <= 0 && runDistance > 0) {
+                 showMessage('Please enter a Run Pace greater than 0.');
+                 return;
+            }
+
+            // Calculate time for each discipline in seconds
+            const swimTimeInSeconds = (swimDistance / 100) * swimPace * 60;
+            const bikeTimeInSeconds = (bikeDistance / bikeSpeed) * 3600;
+            const runTimeInSeconds = runDistance * runPace * 60;
+
+            let transitionTimeInSeconds = 0;
+            if (!transitionSection.classList.contains('hidden')) {
+                transitionTimeInSeconds = (parseInt(t1MInput.value, 10) || 0) * 60 + (parseInt(t1SInput.value, 10) || 0) + 
+                                          (parseInt(t2MInput.value, 10) || 0) * 60 + (parseInt(t2SInput.value, 10) || 0);
+            }
+
+            const totalSeconds = swimTimeInSeconds + bikeTimeInSeconds + runTimeInSeconds + transitionTimeInSeconds;
+
+            // Display individual times
+            swimTimeDisplay.textContent = formatTime(swimTimeInSeconds);
+            bikeTimeDisplay.textContent = formatTime(bikeTimeInSeconds);
+            runTimeDisplay.textContent = formatTime(runTimeInSeconds);
+            transitionTimeDisplay.textContent = formatTime(transitionTimeInSeconds);
+            
+            // Display the total time
+            const totalH = Math.floor(totalSeconds / 3600);
+            const totalM = Math.floor((totalSeconds % 3600) / 60);
+            const totalS = Math.round(totalSeconds % 60);
+            const formatTotal = (time) => String(time).padStart(2, '0');
+            totalHSpan.textContent = formatTotal(totalH);
+            totalMSpan.textContent = formatTotal(totalM);
+            totalSSpan.textContent = formatTotal(totalS);
+
+            resultSection.classList.remove('hidden');
+        };
+
+        // Event Listeners
+        raceDistanceSelect.addEventListener('change', setRaceDistances);
+        calculateBtn.addEventListener('click', calculateTotalTime);
+
+        addTransitionsBtn.addEventListener('click', () => {
+            transitionSection.classList.toggle('hidden');
+            if (transitionSection.classList.contains('hidden')) {
+                addTransitionsBtn.textContent = 'Add Transitions';
+            } else {
+                addTransitionsBtn.textContent = 'Hide Transitions';
+            }
+        });
+        
+    </script>
+</body>
+</html>
