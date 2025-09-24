@@ -19,6 +19,28 @@
             -webkit-appearance: none;
             margin: 0;
         }
+        .tooltip {
+            position: absolute;
+            z-index: 10;
+            background-color: #1f2937;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 100%;
+            margin-left: 0.5rem;
+        }
+
+        .tooltip-container:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
@@ -57,6 +79,18 @@
                             <span class="block text-sm font-medium text-gray-700 mb-1">Pace (minutes per 100 meters)</span>
                             <input id="swim-pace" type="number" min="0" step="0.01" value="1.5" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 transition-colors duration-200 p-3">
                         </label>
+                        <label class="group relative tooltip-container">
+                            <span class="block text-sm font-medium text-gray-700 mb-1">Cut-off Time (hr:min)
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block text-gray-400 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </span>
+                            <div class="flex space-x-2">
+                                <input id="swim-cutoff-h" type="number" min="0" class="w-full rounded-lg border-gray-300 shadow-sm p-3">
+                                <input id="swim-cutoff-m" type="number" min="0" max="59" class="w-full rounded-lg border-gray-300 shadow-sm p-3">
+                            </div>
+                            <span class="tooltip">This cut-off is for the swim time only.</span>
+                        </label>
                     </div>
                 </div>
 
@@ -72,6 +106,18 @@
                             <span class="block text-sm font-medium text-gray-700 mb-1">Speed (km/h)</span>
                             <input id="bike-speed" type="number" min="0" step="0.1" value="30" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 transition-colors duration-200 p-3">
                         </label>
+                        <label class="group relative tooltip-container">
+                            <span class="block text-sm font-medium text-gray-700 mb-1">Cut-off Time (hr:min)
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block text-gray-400 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </span>
+                            <div class="flex space-x-2">
+                                <input id="bike-cutoff-h" type="number" min="0" class="w-full rounded-lg border-gray-300 shadow-sm p-3">
+                                <input id="bike-cutoff-m" type="number" min="0" max="59" class="w-full rounded-lg border-gray-300 shadow-sm p-3">
+                            </div>
+                            <span class="tooltip">This cut-off includes your swim time and T1.</span>
+                        </label>
                     </div>
                 </div>
 
@@ -86,6 +132,18 @@
                         <label>
                             <span class="block text-sm font-medium text-gray-700 mb-1">Pace (minutes per km)</span>
                             <input id="run-pace" type="number" min="0" step="0.01" value="5" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 transition-colors duration-200 p-3">
+                        </label>
+                        <label class="group relative tooltip-container">
+                            <span class="block text-sm font-medium text-gray-700 mb-1">Cut-off Time (hr:min)
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block text-gray-400 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </span>
+                            <div class="flex space-x-2">
+                                <input id="run-cutoff-h" type="number" min="0" class="w-full rounded-lg border-gray-300 shadow-sm p-3">
+                                <input id="run-cutoff-m" type="number" min="0" max="59" class="w-full rounded-lg border-gray-300 shadow-sm p-3">
+                            </div>
+                            <span class="tooltip">This is the total race cut-off, including all stages and transitions.</span>
                         </label>
                     </div>
                 </div>
@@ -169,6 +227,35 @@
                         <span class="text-xl text-gray-500">s</span>
                     </div>
                 </div>
+
+                <!-- Cut-off Status -->
+                <div class="md:col-span-2 bg-white p-4 rounded-xl shadow-sm mt-4">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Cut-off Status</h3>
+                    <div class="space-y-2 text-left text-lg font-medium">
+                        <div class="flex justify-between items-center">
+                            <span>🏊 Swim Cut-off:</span>
+                            <div class="flex-1 text-right">
+                                <span id="swim-calculated-time" class="font-mono text-gray-700 mr-2">00h 00m 00s</span>
+                                <span id="swim-cutoff-status" class="font-bold"></span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>🚴 Bike Cut-off:</span>
+                            <div class="flex-1 text-right">
+                                <span id="bike-calculated-time" class="font-mono text-gray-700 mr-2">00h 00m 00s</span>
+                                <span id="bike-cutoff-status" class="font-bold"></span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>🏃 Run Cut-off:</span>
+                            <div class="flex-1 text-right">
+                                <span id="run-calculated-time" class="font-mono text-gray-700 mr-2">00h 00m 00s</span>
+                                <span id="run-cutoff-status" class="font-bold"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
         
@@ -189,7 +276,7 @@
         const bikeDistanceInput = document.getElementById('bike-distance');
         const bikeSpeedInput = document.getElementById('bike-speed');
         const runDistanceInput = document.getElementById('run-distance');
-        const runPaceInput = document.getElementById('run-pace'); // Changed ID
+        const runPaceInput = document.getElementById('run-pace');
         const t1MInput = document.getElementById('t1-m');
         const t1SInput = document.getElementById('t1-s');
         const t2MInput = document.getElementById('t2-m');
@@ -210,6 +297,20 @@
         const messageText = document.getElementById('message-text');
         const messageOkBtn = document.getElementById('message-ok-btn');
 
+        // New DOM references for cut-offs
+        const swimCutoffHInput = document.getElementById('swim-cutoff-h');
+        const swimCutoffMInput = document.getElementById('swim-cutoff-m');
+        const bikeCutoffHInput = document.getElementById('bike-cutoff-h');
+        const bikeCutoffMInput = document.getElementById('bike-cutoff-m');
+        const runCutoffHInput = document.getElementById('run-cutoff-h');
+        const runCutoffMInput = document.getElementById('run-cutoff-m');
+        const swimCutoffStatus = document.getElementById('swim-cutoff-status');
+        const bikeCutoffStatus = document.getElementById('bike-cutoff-status');
+        const runCutoffStatus = document.getElementById('run-cutoff-status');
+        const swimCalculatedTime = document.getElementById('swim-calculated-time');
+        const bikeCalculatedTime = document.getElementById('bike-calculated-time');
+        const runCalculatedTime = document.getElementById('run-calculated-time');
+
         // Function to show a custom message box
         const showMessage = (message) => {
             messageText.textContent = message;
@@ -227,24 +328,59 @@
                     swimDistanceInput.value = 750;
                     bikeDistanceInput.value = 20;
                     runDistanceInput.value = 5;
+                    // Example cut-offs for Sprint
+                    swimCutoffHInput.value = 0;
+                    swimCutoffMInput.value = 35;
+                    bikeCutoffHInput.value = 1;
+                    bikeCutoffMInput.value = 45;
+                    runCutoffHInput.value = 2;
+                    runCutoffMInput.value = 30;
                     break;
                 case 'olympic':
                     swimDistanceInput.value = 1500;
                     bikeDistanceInput.value = 40;
                     runDistanceInput.value = 10;
+                    // Example cut-offs for Olympic
+                    swimCutoffHInput.value = 1;
+                    swimCutoffMInput.value = 10;
+                    bikeCutoffHInput.value = 3;
+                    bikeCutoffMInput.value = 0;
+                    runCutoffHInput.value = 5;
+                    runCutoffMInput.value = 0;
                     break;
                 case 'half-ironman':
                     swimDistanceInput.value = 1900;
                     bikeDistanceInput.value = 90;
                     runDistanceInput.value = 21.1;
+                    // Example cut-offs for Half Ironman
+                    swimCutoffHInput.value = 1;
+                    swimCutoffMInput.value = 10;
+                    bikeCutoffHInput.value = 5;
+                    bikeCutoffMInput.value = 30;
+                    runCutoffHInput.value = 8;
+                    runCutoffMInput.value = 30;
                     break;
                 case 'ironman':
                     swimDistanceInput.value = 3800;
                     bikeDistanceInput.value = 180;
                     runDistanceInput.value = 42.2;
+                    // Example cut-offs for Ironman
+                    swimCutoffHInput.value = 2;
+                    swimCutoffMInput.value = 20;
+                    bikeCutoffHInput.value = 10;
+                    bikeCutoffMInput.value = 30;
+                    runCutoffHInput.value = 17;
+                    runCutoffMInput.value = 0;
                     break;
                 case 'custom':
                 default:
+                    // Clear cut-off fields for custom distance
+                    swimCutoffHInput.value = '';
+                    swimCutoffMInput.value = '';
+                    bikeCutoffHInput.value = '';
+                    bikeCutoffMInput.value = '';
+                    runCutoffHInput.value = '';
+                    runCutoffMInput.value = '';
                     break;
             }
         };
@@ -258,6 +394,25 @@
             const formattedM = String(m).padStart(2, '0');
             const formattedS = String(s).padStart(2, '0');
             return `${formattedH}h ${formattedM}m ${formattedS}s`;
+        };
+
+        const checkCutoffStatus = (calculatedTime, cutoffTime, statusElement, timeElement) => {
+            timeElement.textContent = formatTime(calculatedTime);
+            if (cutoffTime > 0) {
+                if (calculatedTime <= cutoffTime) {
+                    statusElement.textContent = '(Within Limit)';
+                    statusElement.classList.remove('text-red-600');
+                    statusElement.classList.add('text-green-600');
+                } else {
+                    statusElement.textContent = '(Missed Cut-off)';
+                    statusElement.classList.remove('text-green-600');
+                    statusElement.classList.add('text-red-600');
+                }
+            } else {
+                statusElement.textContent = '(N/A)';
+                statusElement.classList.remove('text-green-600', 'text-red-600');
+                statusElement.classList.add('text-gray-500');
+            }
         };
 
         const calculateTotalTime = () => {
@@ -287,13 +442,20 @@
             const bikeTimeInSeconds = (bikeDistance / bikeSpeed) * 3600;
             const runTimeInSeconds = runDistance * runPace * 60;
 
-            let transitionTimeInSeconds = 0;
+            let t1TimeInSeconds = 0;
+            let t2TimeInSeconds = 0;
             if (!transitionSection.classList.contains('hidden')) {
-                transitionTimeInSeconds = (parseInt(t1MInput.value, 10) || 0) * 60 + (parseInt(t1SInput.value, 10) || 0) + 
-                                          (parseInt(t2MInput.value, 10) || 0) * 60 + (parseInt(t2SInput.value, 10) || 0);
+                t1TimeInSeconds = (parseInt(t1MInput.value, 10) || 0) * 60 + (parseInt(t1SInput.value, 10) || 0);
+                t2TimeInSeconds = (parseInt(t2MInput.value, 10) || 0) * 60 + (parseInt(t2SInput.value, 10) || 0);
             }
+            const transitionTimeInSeconds = t1TimeInSeconds + t2TimeInSeconds;
 
             const totalSeconds = swimTimeInSeconds + bikeTimeInSeconds + runTimeInSeconds + transitionTimeInSeconds;
+            
+            // Get cumulative cut-off times in seconds
+            const swimCutoffSeconds = (parseInt(swimCutoffHInput.value, 10) || 0) * 3600 + (parseInt(swimCutoffMInput.value, 10) || 0) * 60;
+            const bikeCutoffSeconds = (parseInt(bikeCutoffHInput.value, 10) || 0) * 3600 + (parseInt(bikeCutoffMInput.value, 10) || 0) * 60;
+            const runCutoffSeconds = (parseInt(runCutoffHInput.value, 10) || 0) * 3600 + (parseInt(runCutoffMInput.value, 10) || 0) * 60;
 
             // Display individual times
             swimTimeDisplay.textContent = formatTime(swimTimeInSeconds);
@@ -310,6 +472,12 @@
             totalMSpan.textContent = formatTotal(totalM);
             totalSSpan.textContent = formatTotal(totalS);
 
+            // Check and display cut-off status
+            const cumulativeBikeTime = swimTimeInSeconds + t1TimeInSeconds + bikeTimeInSeconds;
+            checkCutoffStatus(swimTimeInSeconds, swimCutoffSeconds, swimCutoffStatus, swimCalculatedTime);
+            checkCutoffStatus(cumulativeBikeTime, bikeCutoffSeconds, bikeCutoffStatus, bikeCalculatedTime);
+            checkCutoffStatus(totalSeconds, runCutoffSeconds, runCutoffStatus, runCalculatedTime);
+
             resultSection.classList.remove('hidden');
         };
 
@@ -325,6 +493,9 @@
                 addTransitionsBtn.textContent = 'Hide Transitions';
             }
         });
+
+        // Set initial Olympic distances and cut-offs
+        setRaceDistances({ target: raceDistanceSelect });
         
     </script>
 </body>
