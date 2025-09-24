@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Triathlon Time Calculator</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⏱️</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
@@ -46,8 +47,13 @@
 <body class="flex items-center justify-center min-h-screen p-4">
 
     <main class="w-full max-w-4xl bg-white rounded-3xl shadow-2xl p-8 space-y-8">
-        <header class="text-center space-y-2">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">Triathlon Time Calculator</h1>
+        <header class="text-center space-y-2 mb-6">
+            <div class="flex items-center justify-center">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">Triathlon Time Calculator</h1>
+                <button id="info-btn" class="ml-4 w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors duration-200 text-gray-700 font-bold flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2">
+                    i
+                </button>
+            </div>
             <p class="text-lg text-gray-600">Calculate your total race time based on your average pace and distance.</p>
         </header>
 
@@ -267,6 +273,52 @@
             </div>
         </div>
 
+        <!-- Info Modal -->
+        <div id="info-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white p-8 rounded-xl shadow-2xl max-w-lg w-full">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Typical Race Distances and Cut-off Times</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700 mb-6">
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <h4 class="font-bold text-xl mb-2 text-blue-800">Sprint Triathlon</h4>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>Distances: 750m Swim, 20km Bike, 5km Run</li>
+                            <li>Swim Cut-off: ~0h 35m</li>
+                            <li>Bike Cut-off: ~1h 45m</li>
+                            <li>Total Race Cut-off: ~2h 30m</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <h4 class="font-bold text-xl mb-2 text-green-800">Olympic Triathlon</h4>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>Distances: 1500m Swim, 40km Bike, 10km Run</li>
+                            <li>Swim Cut-off: ~1h 10m</li>
+                            <li>Bike Cut-off: ~3h 0m</li>
+                            <li>Total Race Cut-off: ~4h 30m</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <h4 class="font-bold text-xl mb-2 text-red-800">Half Ironman (70.3)</h4>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>Distances: 1.9km Swim, 90km Bike, 21.1km Run</li>
+                            <li>Swim Cut-off: ~1h 10m</li>
+                            <li>Bike Cut-off: ~5h 30m</li>
+                            <li>Total Race Cut-off: ~8h 30m</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <h4 class="font-bold text-xl mb-2 text-yellow-800">Ironman (140.6)</h4>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>Distances: 3.8km Swim, 180km Bike, 42.2km Run</li>
+                            <li>Swim Cut-off: ~2h 20m</li>
+                            <li>Bike Cut-off: ~10h 30m</li>
+                            <li>Total Race Cut-off: ~17h 0m</li>
+                        </ul>
+                    </div>
+                </div>
+                <button id="info-modal-close-btn" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 transition-colors">Got it!</button>
+            </div>
+        </div>
+
     </main>
 
     <script>
@@ -297,7 +349,7 @@
         const messageText = document.getElementById('message-text');
         const messageOkBtn = document.getElementById('message-ok-btn');
 
-        // New DOM references for cut-offs
+        // New DOM references for cut-offs and info modal
         const swimCutoffHInput = document.getElementById('swim-cutoff-h');
         const swimCutoffMInput = document.getElementById('swim-cutoff-m');
         const bikeCutoffHInput = document.getElementById('bike-cutoff-h');
@@ -310,6 +362,9 @@
         const swimCalculatedTime = document.getElementById('swim-calculated-time');
         const bikeCalculatedTime = document.getElementById('bike-calculated-time');
         const runCalculatedTime = document.getElementById('run-calculated-time');
+        const infoBtn = document.getElementById('info-btn');
+        const infoModal = document.getElementById('info-modal');
+        const infoModalCloseBtn = document.getElementById('info-modal-close-btn');
 
         // Function to show a custom message box
         const showMessage = (message) => {
@@ -345,8 +400,8 @@
                     swimCutoffMInput.value = 10;
                     bikeCutoffHInput.value = 3;
                     bikeCutoffMInput.value = 0;
-                    runCutoffHInput.value = 5;
-                    runCutoffMInput.value = 0;
+                    runCutoffHInput.value = 4; // Updated to 4 hours
+                    runCutoffMInput.value = 30; // Updated to 30 minutes
                     break;
                 case 'half-ironman':
                     swimDistanceInput.value = 1900;
@@ -401,11 +456,11 @@
             if (cutoffTime > 0) {
                 if (calculatedTime <= cutoffTime) {
                     statusElement.textContent = '(Within Limit)';
-                    statusElement.classList.remove('text-red-600');
+                    statusElement.classList.remove('text-red-600', 'text-gray-500');
                     statusElement.classList.add('text-green-600');
                 } else {
                     statusElement.textContent = '(Missed Cut-off)';
-                    statusElement.classList.remove('text-green-600');
+                    statusElement.classList.remove('text-green-600', 'text-gray-500');
                     statusElement.classList.add('text-red-600');
                 }
             } else {
@@ -492,6 +547,14 @@
             } else {
                 addTransitionsBtn.textContent = 'Hide Transitions';
             }
+        });
+
+        infoBtn.addEventListener('click', () => {
+            infoModal.classList.remove('hidden');
+        });
+
+        infoModalCloseBtn.addEventListener('click', () => {
+            infoModal.classList.add('hidden');
         });
 
         // Set initial Olympic distances and cut-offs
